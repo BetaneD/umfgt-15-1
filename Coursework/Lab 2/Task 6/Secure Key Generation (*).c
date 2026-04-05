@@ -22,7 +22,7 @@ int main() {
     printf("please enter a maximum value : ");
     scanf("%d",&x);
 
-    printf("%d\n", rand()%(x+1));
+    printf("%d\n",rand()%(x+1));
 
     return 0;
 }
