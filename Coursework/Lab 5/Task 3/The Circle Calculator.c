@@ -36,7 +36,7 @@ int main()
     double area = calculate_area(10);
 
     printf("the cirmuference is %.3lf\n",circumference);
-    printf("the area is %.3lf\n",area);
+    printf("the area is %.3lf\n", area);
 
     return 0;
 }
