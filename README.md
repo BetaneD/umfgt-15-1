@@ -1,8 +1,12 @@
 Development Log for Software Design: "Title of project”
+
 Project Title: Student Management System
-Date Started: January 1, 2025
-Development Period: X Weeks. 
-Author: Name Here.
+
+Date Started: April 3 , 2026
+
+Development Period: 3 Weeks. 
+
+Author: Betane Daudi
 
  
 1. Structure Chart
