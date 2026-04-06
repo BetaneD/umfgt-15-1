@@ -1,0 +1,56 @@
+Development Log for Software Design: "Title of project”
+Project Title: Student Management System
+Date Started: January 1, 2025
+Development Period: X Weeks. 
+Author: Name Here.
+
+ 
+1. Structure Chart
+A structure chart is created to visually represent the different modules in the system. Below is a simple structure chart of the system.
+Insert Structure Chart Here
+
+2. Program Design (Pseudocode/Flowcharts)
+Pseudocode Example for "Function or block as appropriate"
+Version x.x.
+
+3. Function Description
+Each function in the system is described below:
+•	Example Function, version x.x
+o	Description: The function does….
+o	Input Parameters: List acceptable data types and ranges here and order.
+o	Returns: What the output returns, and where applicable, what it means.
+4. Evidence of Unit Testing
+Unit Testing Function Name Version X.X:
+•	Test Case 1:
+o	Input: data types and numbers
+o	Expected Output: 80.0
+o	Result: Passed
+•	Test Case n: (repeat as needed)
+Unit Test Results Summary:
+•	General description, any issues remaining?
+•	Edge cases, such as X, were tested (not) successfully.
+•	List any things needing resolving in future versions
+5. Evidence of Integration Testing
+Integration Test:
+•	Blocks/Functions tested together: Function name1 x.x and function name2 x.x
+o	Test Steps:
+1.	List these here
+o	Expected Outcome:
+	Program should X.
+	Functions should Y.
+o	Result: Passed
+Integration Test Results Summary:
+•	The system correctly integrates Function name1 x.x and Function name2 x.x.
+•	The following still needs to be resolved/implemented….
+5. Evidence of Scenario Testing
+Software/project version X.x 
+Testing scenario: Tests a series of events to test larger functionality – describe here
+Steps:
+1.	Input thing
+2.	Validate input (successful).
+3.	Receive next input
+4.	Do something else here 
+4.1 multiple variations can be tested here 
+4.1.1 event – Passed
+4.1.2 event – Passed
+4.2 event - Failed.
