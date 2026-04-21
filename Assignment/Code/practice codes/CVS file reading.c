@@ -1,4 +1,4 @@
-// C program to Create a file
+ // C program to Create a file
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
