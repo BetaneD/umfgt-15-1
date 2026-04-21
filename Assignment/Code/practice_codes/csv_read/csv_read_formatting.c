@@ -11,7 +11,7 @@ int main(void)
 
     if (fptr==NULL) {
 
-        printf("error");
+        printf("ERROR: file unable to open");
         return 1;
     }
 
