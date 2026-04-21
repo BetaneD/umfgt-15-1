@@ -34,7 +34,7 @@ int main(void)
         token = strtok(NULL,",");
         float phase_C = atof(token);
 
-        /*token = strtok(NULL,",");
+        token = strtok(NULL,",");
         float line_C = atof(token);
 
         token = strtok(NULL,",");
@@ -45,10 +45,11 @@ int main(void)
 
         token = strtok(NULL,",");
         float thd = atof(token);
-        */
 
-        printf ("Timestamp:\t %.2f,phase_A:\t %.2f,phase_B:\t %.2f,phase_C:\t %.2f",
-               Time,phase_A,phase_B,phase_C );
+
+        printf("Timestamp:\t %.2f, phase_A:\t %.2f, phase_B:\t %.2f, phase_C:\t %.2f, "
+                "line_C:\t %.2f, frequency:\t %.2f, power_f:\t %.2f, thd:\t %.2f\n",
+               Time,phase_A,phase_B,phase_C,line_C,frequency,power_f,thd);
 
     }
 
