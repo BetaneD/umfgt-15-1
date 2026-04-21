@@ -6,7 +6,7 @@
 // Driver code
 int main(void)
 {
-    FILE *fptr = fopen("power_quality_log.cvs", "r");
+    FILE *fptr = fopen("power_quality_log.csv", "r");
 
     if (fptr==NULL) {
 
