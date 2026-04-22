@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include "Waveform_struct.h"
-#include "Waveform_math.h"
+#include "io.h"
+#include "waveform.h"
 
  // Driver code
 int main(void)
