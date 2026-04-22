@@ -142,4 +142,37 @@ void Detect_clipping_C(double limit,int rows,Waveform *data) {
     }
 }
 
+void DC_offset_A(int rows,Waveform *data) {
+
+    double offset = 0.0;
+
+    for (int j = 0; j < rows; j++) {
+        offset += data[j].phase_A;
+    }
+    offset = offset/rows;
+    printf("\n\n The DC offset is :%lf",offset);
+}
+
+void DC_offset_B(int rows,Waveform *data) {
+
+    double offset = 0.0;
+
+    for (int j = 0; j < rows; j++) {
+        offset += data[j].phase_B;
+    }
+    offset = offset/rows;
+    printf("\n\n The DC offset is :%lf",offset);
+}
+
+void DC_offset_C(int rows,Waveform *data) {
+
+    double offset = 0.0;
+
+    for (int j = 0; j < rows; j++) {
+        offset += data[j].phase_C;
+    }
+    offset = offset/rows;
+    printf("\n\n The DC offset is :%lf",offset);
+}
+
 #endif //UMFGT_15_1_WAVEFORM_MATH_H
