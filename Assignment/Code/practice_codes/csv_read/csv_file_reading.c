@@ -98,8 +98,6 @@ int rows = 0;
     phase_C_rms = sqrt(phase_C_rms/rows);
   }
 
-
-
   if (phase_A_rms >= 230 || 229 >= phase_A_rms) {
     printf("\n\n the rms of Phase A is %0.4lf\n has not met 230V nominal", phase_A_rms);
   } else {
