@@ -98,6 +98,7 @@ int rows = 0;
   amplitude_A(rows,data);
   Detect_clipping_A(324.9,rows,data);
   DC_offset_A(rows,data);
+  STDEV_A(rows,data);
 
   ///// PHASE B /////
   printf("\n\n---PHASE B---");
@@ -107,6 +108,7 @@ int rows = 0;
   amplitude_B(rows,data);
   Detect_clipping_B(324.9,rows,data);
   DC_offset_B(rows,data);
+  STDEV_B(rows,data);
 
   ///// PHASE C /////
   printf("\n\n---PHASE C---");
@@ -116,6 +118,7 @@ int rows = 0;
   amplitude_C(rows,data);
   Detect_clipping_C(324.9,rows,data);
   DC_offset_C(rows,data);
+  STDEV_C(rows,data);
 
   free(data);
 
