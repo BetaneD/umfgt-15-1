@@ -94,4 +94,32 @@ void amplitude_C (int rows,Waveform *data) {
     printf("\n\n the peak-to-peak amplitude is %.2f", max - min);
 }
 
+void Detect_clipping_A(double limit,int rows,Waveform *data) {
+
+    printf("\n\n sample at Timestamp :");
+    for (int j = 0; j < rows; j++) {
+        (data[j].phase_A >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
+    }
+    printf("\n has surpassed the limit");
+}
+
+void Detect_clipping_B(double limit,int rows,Waveform *data) {
+
+    printf("\n\n sample at Timestamp :");
+    for (int j = 0; j < rows; j++) {
+        (data[j].phase_C >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
+    }
+    printf("\n has surpassed the limit");
+
+}
+
+void Detect_clipping_C(double limit,int rows,Waveform *data) {
+
+    printf("\n\n sample at Timestamp :");
+    for (int j = 0; j < rows; j++) {
+        (data[j].phase_C >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
+    }
+    printf("\n has surpassed the limit");
+}
+
 #endif //UMFGT_15_1_WAVEFORM_MATH_H
