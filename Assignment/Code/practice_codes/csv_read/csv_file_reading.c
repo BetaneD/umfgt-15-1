@@ -91,13 +91,13 @@ int rows = 0;
   double phase_C_rms = rms_C(rows, data);
 
   if (phase_A_rms >= 229 || 230 >= phase_A_rms) {
-    printf("\n\n the rms of Phase A is %0.4lf\n has not met 230V nominal", phase_A_rms);
+    printf("\n\n the rms of Phase A is %0.4lf \n has not met 230V nominal", phase_A_rms);
   } else {
     printf("\n\n the rms of Phase A is %0.4lf \n has met 230V nominal", phase_A_rms);
   }
 
   if (phase_B_rms >= 229 || 230 >= phase_B_rms) {
-    printf("\n\n the rms of Phase B is %0.4lf\n has not met 230V nominal", phase_B_rms);
+    printf("\n\n the rms of Phase B is %0.4lf \n has not met 230V nominal", phase_B_rms);
   } else {
     printf("\n\n the rms of Phase B is %0.4lf \n has met 230V nominal", phase_B_rms);
   }
