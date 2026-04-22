@@ -95,31 +95,51 @@ void amplitude_C (int rows,Waveform *data) {
 }
 
 void Detect_clipping_A(double limit,int rows,Waveform *data) {
+    int detect = 0;
 
-    printf("\n\n sample at Timestamp :");
     for (int j = 0; j < rows; j++) {
-        (data[j].phase_A >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
+        if (data[j].phase_A >= limit ) detect++;
     }
-    printf("\n has surpassed the limit");
+    if (detect == 0) {
+        printf("\n\n No clipping detected");
+    } else {
+        printf("\n\n clipping detected at Timestamp :");
+        for (int j = 0; j < rows; j++) {
+            (data[j].phase_A >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
+        }
+    }
 }
 
 void Detect_clipping_B(double limit,int rows,Waveform *data) {
+int detect = 0;
 
-    printf("\n\n sample at Timestamp :");
     for (int j = 0; j < rows; j++) {
-        (data[j].phase_C >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
+        if (data[j].phase_B >= limit ) detect++;
     }
-    printf("\n has surpassed the limit");
-
+    if (detect == 0) {
+        printf("\n\n No clipping detected");
+    } else {
+        printf("\n\n clipping detected at Timestamp:");
+        for (int j = 0; j < rows; j++) {
+            (data[j].phase_B >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
+        }
+    }
 }
 
 void Detect_clipping_C(double limit,int rows,Waveform *data) {
+    int detect = 0;
 
-    printf("\n\n sample at Timestamp :");
     for (int j = 0; j < rows; j++) {
-        (data[j].phase_C >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
+        if (data[j].phase_C >= limit ) detect++;
     }
-    printf("\n has surpassed the limit");
+    if (detect == 0) {
+        printf("\n\n No clipping detected");
+    } else {
+        printf("\n\n clipping detected at Timestamp :");
+        for (int j = 0; j < rows; j++) {
+            (data[j].phase_C >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
+        }
+    }
 }
 
 #endif //UMFGT_15_1_WAVEFORM_MATH_H
