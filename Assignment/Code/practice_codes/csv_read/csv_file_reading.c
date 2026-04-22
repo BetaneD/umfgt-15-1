@@ -71,7 +71,7 @@ int rows = 0;
     i++;
     }
 
-  for (int j = 0; j < rows ; j++) {
+  for (int j = 0; j < rows && j < 3; j++) {
     printf("Timestamp: %.2f | phase_A: %.2f | phase_B: %.2f | phase_C: %.2f | Line_C: %.2f | Frequency: %.2f | Power_F: %.2f | THD: %.2f\n",
            data[j].timestamp,
            data[j].phase_A,
@@ -97,6 +97,7 @@ int rows = 0;
   tolerance_check(rows,230,10,phase_A_rms);
   amplitude_A(rows,data);
   Detect_clipping_A(324.9,rows,data);
+  DC_offset_A(rows,data);
 
   ///// PHASE B /////
   printf("\n\n---PHASE B---");
@@ -105,6 +106,7 @@ int rows = 0;
   tolerance_check(rows,230,10,phase_B_rms);
   amplitude_B(rows,data);
   Detect_clipping_B(324.9,rows,data);
+  DC_offset_B(rows,data);
 
   ///// PHASE C /////
   printf("\n\n---PHASE C---");
@@ -113,6 +115,7 @@ int rows = 0;
   tolerance_check(rows,230,10,phase_C_rms);
   amplitude_C(rows,data);
   Detect_clipping_C(324.9,rows,data);
+  DC_offset_C(rows,data);
 
   free(data);
 
