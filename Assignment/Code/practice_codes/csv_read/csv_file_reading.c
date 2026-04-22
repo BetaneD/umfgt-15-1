@@ -103,7 +103,7 @@ int rows = 0;
   }
 
   if (phase_C_rms >= 229 || 230 >= phase_C_rms) {
-    printf("\n\n the rms of Phase C is %0.4lf\n has not met 230V nominal", phase_C_rms);
+    printf("\n\n the rms of Phase C is %0.4lf \n has not met 230V nominal", phase_C_rms);
   } else {
     printf("\n\n the rms of Phase C is %0.4lf \n has met 230V nominal", phase_C_rms);
   }
