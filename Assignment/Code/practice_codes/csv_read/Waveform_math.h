@@ -44,20 +44,19 @@ double rms_C (int rows,Waveform *data) {
         rms = sqrt(rms /rows);
     }
     return rms;
-}
 
-double rms_C (int rows,Waveform *data) {
+void tolerance_check(int rows, int voltage, int tolerance, double rms) {
 
-    double rms = 0.0;
+    int vmax = voltage + (voltage/tolerance);
+    int vmin = voltage - (voltage/tolerance);
 
-    for (int j = 0; j < rows; j++) {
-        rms += data[j].phase_C * data[j].phase_C;
-    }
+    if (vmin <= rms && rms <= vmax){
+        printf("\n\n the rms has met 230V nominal");
+        } else {
 
-    if (rows > 0) {
-        rms = sqrt(rms /rows);
-    }
-    return rms;
+            printf("\n\n the rms has not met 230V nominal");
+
+        }
 }
 
 #endif //UMFGT_15_1_WAVEFORM_MATH_H
