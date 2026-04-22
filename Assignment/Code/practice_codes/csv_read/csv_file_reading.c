@@ -86,27 +86,27 @@ int rows = 0;
 
   int j = 0;
 
+
+
+
+  ///// PHASE A /////
+  printf("\n\n---PHASE A---");
+
   double phase_A_rms = rms_A(rows, data);
+  printf("\n the RMS of phase A is %.2f", phase_A_rms);
+  tolerance_check(rows,230,10,phase_A_rms);
+
+  ///// PHASE B /////
+  printf("\n\n---PHASE B---");
   double phase_B_rms = rms_B(rows, data);
+  printf("\n the RMS of phase B is %.2f", phase_B_rms);
+  tolerance_check(rows,230,10,phase_B_rms);
+
+  ///// PHASE C /////
+  printf("\n\n---PHASE C---");
   double phase_C_rms = rms_C(rows, data);
-
-  if (phase_A_rms >= 229 || 230 >= phase_A_rms) {
-    printf("\n\n the rms of Phase A is %0.4lf \n has not met 230V nominal", phase_A_rms);
-  } else {
-    printf("\n\n the rms of Phase A is %0.4lf \n has met 230V nominal", phase_A_rms);
-  }
-
-  if (phase_B_rms >= 229 || 230 >= phase_B_rms) {
-    printf("\n\n the rms of Phase B is %0.4lf \n has not met 230V nominal", phase_B_rms);
-  } else {
-    printf("\n\n the rms of Phase B is %0.4lf \n has met 230V nominal", phase_B_rms);
-  }
-
-  if (phase_C_rms >= 229 || 230 >= phase_C_rms) {
-    printf("\n\n the rms of Phase C is %0.4lf \n has not met 230V nominal", phase_C_rms);
-  } else {
-    printf("\n\n the rms of Phase C is %0.4lf \n has met 230V nominal", phase_C_rms);
-  }
+  printf("\n the RMS of phase C is %.2f", phase_C_rms);
+  tolerance_check(rows,230,10,phase_C_rms);
 
   free(data);
 
