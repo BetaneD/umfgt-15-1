@@ -96,6 +96,7 @@ int rows = 0;
   printf("\n the RMS of phase A is %.2f", phase_A_rms);
   tolerance_check(rows,230,10,phase_A_rms);
   amplitude_A(rows,data);
+  Detect_clipping_A(324.9,rows,data);
 
   ///// PHASE B /////
   printf("\n\n---PHASE B---");
@@ -103,6 +104,7 @@ int rows = 0;
   printf("\n the RMS of phase B is %.2f", phase_B_rms);
   tolerance_check(rows,230,10,phase_B_rms);
   amplitude_B(rows,data);
+  Detect_clipping_B(324.9,rows,data);
 
   ///// PHASE C /////
   printf("\n\n---PHASE C---");
@@ -110,6 +112,7 @@ int rows = 0;
   printf("\n the RMS of phase C is %.2f", phase_C_rms);
   tolerance_check(rows,230,10,phase_C_rms);
   amplitude_C(rows,data);
+  Detect_clipping_C(324.9,rows,data);
 
   free(data);
 
