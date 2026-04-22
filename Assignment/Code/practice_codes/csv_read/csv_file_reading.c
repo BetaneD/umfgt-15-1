@@ -4,8 +4,9 @@
 #include <string.h>
 #include <math.h>
 #include "Waveform_struct.h"
+#include "Waveform_math.h"
 
-// Driver code
+ // Driver code
 int main(void)
 {
 int rows = 0;
@@ -70,7 +71,7 @@ int rows = 0;
     i++;
     }
 
-  for (int j = 0; j < rows; j++) {
+  for (int j = 0; j < rows && j < 3; j++) {
     printf("Timestamp: %.2f | phase_A: %.2f | phase_B: %.2f | phase_C: %.2f | Line_C: %.2f | Frequency: %.2f | Power_F: %.2f | THD: %.2f\n",
            data[j].timestamp,
            data[j].phase_A,
@@ -82,42 +83,32 @@ int rows = 0;
            data[j].thd
            );
   }
-  int j;
-  double phase_A_rms = 0.0;
-  double phase_B_rms = 0.0;
-  double phase_C_rms = 0.0;
 
-  for (j = 0; j < rows; j++) {
-    phase_A_rms += data[j].phase_A * data[j].phase_A;
-    phase_B_rms += data[j].phase_B * data[j].phase_B;
-    phase_C_rms += data[j].phase_C * data[j].phase_C;
-  }
-  if (rows > 0) {
-    phase_A_rms = sqrt(phase_A_rms/rows);
-    phase_B_rms = sqrt(phase_B_rms/rows);
-    phase_C_rms = sqrt(phase_C_rms/rows);
-  }
+  int j = 0;
 
-  if (phase_A_rms >= 230 || 229 >= phase_A_rms) {
+  double phase_A_rms = rms_A(rows, data);
+  double phase_B_rms = rms_B(rows, data);
+  double phase_C_rms = rms_C(rows, data);
+
+  if (phase_A_rms >= 229 || 230 >= phase_A_rms) {
     printf("\n\n the rms of Phase A is %0.4lf\n has not met 230V nominal", phase_A_rms);
   } else {
     printf("\n\n the rms of Phase A is %0.4lf \n has met 230V nominal", phase_A_rms);
   }
 
-  if (phase_B_rms >= 230 || 229 >= phase_B_rms) {
+  if (phase_B_rms >= 229 || 230 >= phase_B_rms) {
     printf("\n\n the rms of Phase B is %0.4lf\n has not met 230V nominal", phase_B_rms);
   } else {
     printf("\n\n the rms of Phase B is %0.4lf \n has met 230V nominal", phase_B_rms);
   }
 
-  if (phase_C_rms >= 230 || 229 >= phase_C_rms) {
+  if (phase_C_rms >= 229 || 230 >= phase_C_rms) {
     printf("\n\n the rms of Phase C is %0.4lf\n has not met 230V nominal", phase_C_rms);
   } else {
     printf("\n\n the rms of Phase C is %0.4lf \n has met 230V nominal", phase_C_rms);
   }
 
   free(data);
-
 
     fclose(fptr);
 
