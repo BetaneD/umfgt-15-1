@@ -13,12 +13,10 @@ double rms_A (int rows,Waveform *data) {
         rms += data[j].phase_A * data[j].phase_A;
     }
 
-    if (rows > 0) {
-        rms = sqrt(rms /rows);
-    }
+    if (rows > 0) rms = sqrt(rms /rows);
+
     return rms;
 }
-
 double rms_B (int rows,Waveform *data) {
 
     double rms = 0.0;
@@ -27,9 +25,8 @@ double rms_B (int rows,Waveform *data) {
         rms += data[j].phase_B * data[j].phase_B;
     }
 
-    if (rows > 0) {
-        rms = sqrt(rms /rows);
-    }
+    if (rows > 0) rms = sqrt(rms /rows);
+
     return rms;
 }
 double rms_C (int rows,Waveform *data) {
@@ -39,11 +36,11 @@ double rms_C (int rows,Waveform *data) {
         rms += data[j].phase_C * data[j].phase_C;
     }
 
-    if (rows > 0) {
-        rms = sqrt(rms /rows);
-    }
+    if (rows > 0) rms = sqrt(rms /rows);
+
     return rms;
 }
+
 void tolerance_check(int rows, int voltage, int tolerance, double rms) {
 
     int vmax = voltage + (voltage/tolerance);
@@ -69,7 +66,6 @@ void amplitude_A (int rows,Waveform *data) {
     }
     printf("\n\n the peak-to-peak amplitude is %.2f", max - min);
 }
-
 void amplitude_B (int rows,Waveform *data) {
 
     double max = 0.0;
@@ -81,7 +77,6 @@ void amplitude_B (int rows,Waveform *data) {
     }
     printf("\n\n the peak-to-peak amplitude is %.2f", max - min);
 }
-
 void amplitude_C (int rows,Waveform *data) {
 
     double max = 0.0;
@@ -109,7 +104,6 @@ void Detect_clipping_A(double limit,int rows,Waveform *data) {
         }
     }
 }
-
 void Detect_clipping_B(double limit,int rows,Waveform *data) {
 int detect = 0;
 
@@ -125,7 +119,6 @@ int detect = 0;
         }
     }
 }
-
 void Detect_clipping_C(double limit,int rows,Waveform *data) {
     int detect = 0;
 
@@ -152,7 +145,6 @@ void DC_offset_A(int rows,Waveform *data) {
     offset = offset/rows;
     printf("\n\n The DC offset is :%lf",offset);
 }
-
 void DC_offset_B(int rows,Waveform *data) {
 
     double offset = 0.0;
@@ -163,7 +155,6 @@ void DC_offset_B(int rows,Waveform *data) {
     offset = offset/rows;
     printf("\n\n The DC offset is :%lf",offset);
 }
-
 void DC_offset_C(int rows,Waveform *data) {
 
     double offset = 0.0;
@@ -173,6 +164,73 @@ void DC_offset_C(int rows,Waveform *data) {
     }
     offset = offset/rows;
     printf("\n\n The DC offset is :%lf",offset);
+}
+
+void STDEV_A(int rows,Waveform *data) {
+
+    double mean = 0.0;
+    double stdev = 0.0;
+    double variance = 0.0;
+
+    for (int j = 0; j < rows; j++) {
+        mean += data[j].phase_A;
+    }
+
+    if (rows > 0) mean = mean /rows;
+
+    for (int j = 0; j < rows; j++) {
+        double distance = data[j].phase_A - mean;
+        stdev += distance * distance;
+    }
+    variance = stdev/rows;
+    stdev = sqrt(stdev/rows);
+
+    printf("\n\n The variance is :%0.3lf",variance);
+    printf("\n\n The STDEV is :%.03lf",stdev);
+}
+void STDEV_B(int rows,Waveform *data) {
+
+    double mean = 0.0;
+    double stdev = 0.0;
+    double variance = 0.0;
+
+    for (int j = 0; j < rows; j++) {
+        mean += data[j].phase_B;
+    }
+
+    if (rows > 0) mean = mean /rows;
+
+    for (int j = 0; j < rows; j++) {
+        double distance = data[j].phase_B - mean;
+        stdev += distance * distance;
+    }
+    variance = stdev/rows;
+    stdev = sqrt(stdev/rows);
+
+    printf("\n\n The variance is :%0.3lf",variance);
+    printf("\n\n The STDEV is :%.03lf",stdev);
+}
+void STDEV_C(int rows,Waveform *data) {
+
+    double mean = 0.0;
+    double stdev = 0.0;
+    double variance = 0.0;
+
+    for (int j = 0; j < rows; j++) {
+        mean += data[j].phase_C;
+    }
+
+    if (rows > 0) mean = mean /rows;
+
+    for (int j = 0; j < rows; j++) {
+        double distance = data[j].phase_C - mean;
+        stdev += distance * distance;
+    }
+    variance = stdev/rows;
+    stdev = sqrt(stdev/rows);
+
+    printf("\n\n The variance is :%0.3lf",variance);
+    printf("\n\n The STDEV is :%.03lf",stdev);
 }
 
 #endif //UMFGT_15_1_WAVEFORM_MATH_H
