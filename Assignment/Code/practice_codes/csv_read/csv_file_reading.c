@@ -82,7 +82,41 @@ int rows = 0;
            data[j].thd
            );
   }
+  int j;
+  double phase_A_rms = 0.0;
+  double phase_B_rms = 0.0;
+  double phase_C_rms = 0.0;
 
+  for (j = 0; j < rows; j++) {
+    phase_A_rms += data[j].phase_A * data[j].phase_A;
+    phase_B_rms += data[j].phase_B * data[j].phase_B;
+    phase_C_rms += data[j].phase_C * data[j].phase_C;
+  }
+  if (rows > 0) {
+    phase_A_rms = sqrt(phase_A_rms/rows);
+    phase_B_rms = sqrt(phase_B_rms/rows);
+    phase_C_rms = sqrt(phase_C_rms/rows);
+  }
+
+
+
+  if (phase_A_rms >= 230 || 229 >= phase_A_rms) {
+    printf("\n\n the rms of Phase A is %0.4lf\n has not met 230V nominal", phase_A_rms);
+  } else {
+    printf("\n\n the rms of Phase A is %0.4lf \n has met 230V nominal", phase_A_rms);
+  }
+
+  if (phase_B_rms >= 230 || 229 >= phase_B_rms) {
+    printf("\n\n the rms of Phase B is %0.4lf\n has not met 230V nominal", phase_B_rms);
+  } else {
+    printf("\n\n the rms of Phase B is %0.4lf \n has met 230V nominal", phase_B_rms);
+  }
+
+  if (phase_C_rms >= 230 || 229 >= phase_C_rms) {
+    printf("\n\n the rms of Phase C is %0.4lf\n has not met 230V nominal", phase_C_rms);
+  } else {
+    printf("\n\n the rms of Phase C is %0.4lf \n has met 230V nominal", phase_C_rms);
+  }
 
   free(data);
 
