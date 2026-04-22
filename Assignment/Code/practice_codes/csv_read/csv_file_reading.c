@@ -71,7 +71,7 @@ int rows = 0;
     i++;
     }
 
-  for (int j = 0; j < rows && j < 3; j++) {
+  for (int j = 0; j < rows ; j++) {
     printf("Timestamp: %.2f | phase_A: %.2f | phase_B: %.2f | phase_C: %.2f | Line_C: %.2f | Frequency: %.2f | Power_F: %.2f | THD: %.2f\n",
            data[j].timestamp,
            data[j].phase_A,
@@ -95,18 +95,21 @@ int rows = 0;
   double phase_A_rms = rms_A(rows, data);
   printf("\n the RMS of phase A is %.2f", phase_A_rms);
   tolerance_check(rows,230,10,phase_A_rms);
+  amplitude_A(rows,data);
 
   ///// PHASE B /////
   printf("\n\n---PHASE B---");
   double phase_B_rms = rms_B(rows, data);
   printf("\n the RMS of phase B is %.2f", phase_B_rms);
   tolerance_check(rows,230,10,phase_B_rms);
+  amplitude_B(rows,data);
 
   ///// PHASE C /////
   printf("\n\n---PHASE C---");
   double phase_C_rms = rms_C(rows, data);
   printf("\n the RMS of phase C is %.2f", phase_C_rms);
   tolerance_check(rows,230,10,phase_C_rms);
+  amplitude_C(rows,data);
 
   free(data);
 
