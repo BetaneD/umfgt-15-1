@@ -3,8 +3,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <stdio.h>
 #include "io.h"
 #include "waveform.h"
+#include "Sort.h"
 
  // Driver code
 int main(void)
@@ -99,8 +101,9 @@ int rows = 0;
   Detect_clipping_A(324.9,rows,data);
   DC_offset_A(rows,data);
   STDEV_A(rows,data);
+  insertionSort(rows, data);
 
-  ///// PHASE B /////
+  /*//// PHASE B /////
   printf("\n\n---PHASE B---");
   double phase_B_rms = rms_B(rows, data);
   printf("\n the RMS of phase B is %.2f", phase_B_rms);
@@ -119,6 +122,7 @@ int rows = 0;
   Detect_clipping_C(324.9,rows,data);
   DC_offset_C(rows,data);
   STDEV_C(rows,data);
+  */
 
   free(data);
 
