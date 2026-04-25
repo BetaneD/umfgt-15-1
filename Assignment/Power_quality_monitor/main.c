@@ -5,7 +5,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include "waveform.h"
+#include "waveform(2).h"
 #include "../../Assignment practice/Code/practice_codes/csv_read/sort(2).h"
 #include "io.h"
 

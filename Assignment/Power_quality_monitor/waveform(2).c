@@ -2,7 +2,7 @@
 // Created by Fatima Daudi on 25/04/2026.
 //
 
-#include "waveform.h"
+#include "waveform(2).h"
 
 #include <stdbool.h>
 #include <math.h>
