@@ -1,11 +1,11 @@
 //
-// Created by Fatima Daudi on 25/04/2026.
+// Created by Fatima Daudi on 23/04/2026.
 //
 
-#include "sort(2).h"
-#include "io.h"
+#ifndef UMFGT_15_1_SORT_H
+#define UMFGT_15_1_SORT_H
 
-void insertionSort(const int rows,Waveform *data) {
+void insertionSort(int rows,Waveform *data) {
 
     for (int i = 1; i < rows; i++)
     {
@@ -26,3 +26,4 @@ void insertionSort(const int rows,Waveform *data) {
         printf("\n%f ", data[i].phase_A);
     }
 }
+#endif //UMFGT_15_1_SORT_H
