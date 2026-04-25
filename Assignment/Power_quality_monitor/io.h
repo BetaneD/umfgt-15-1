@@ -1,9 +1,9 @@
 //
-// Created by Fatima Daudi on 21/04/2026.
+// Created by Fatima Daudi on 25/04/2026.
 //
 
-#ifndef WAVEFORM_STRUCT_H
-#define WAVEFORM_STRUCT_H
+#ifndef UMFGT_15_1_IO_H
+#define UMFGT_15_1_IO_H
 typedef struct {
 
     float timestamp;
@@ -16,4 +16,6 @@ typedef struct {
     float thd;
 }Waveform;
 
-#endif //UMFGT_15_1_WAVEFORM_STRUCT_H
+Waveform* csv_open(int *rows);
+
+#endif //UMFGT_15_1_IO_H
