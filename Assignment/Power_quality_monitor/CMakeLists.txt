@@ -3,10 +3,8 @@ project(Power_quality_monitor C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(untitled3 main.c
-        waveform.c
-        waveform.h
-        io.c
-        io.h
+add_executable(Power_quality_monitor
         main.c
+        waveform.c
+        io.c
 )
