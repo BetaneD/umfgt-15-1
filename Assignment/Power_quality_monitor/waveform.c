@@ -2,14 +2,11 @@
 // Created by Fatima Daudi on 25/04/2026.
 //
 
-#include "waveform(2).h"
+#include "waveform.h"
+#include "io.h"
 
 #include <stdbool.h>
 #include <math.h>
-
-#include "io.h"
-
-
 
 double rms_A (int rows,Waveform *data) {
 
@@ -106,50 +103,33 @@ double DC_offset_C(int rows,Waveform *data) {
     return offset;
 }
 
-void Detect_clipping_A(double limit,int rows,Waveform *data) {
+
+int Detect_clipping_A(double limit,int rows,Waveform *data) {
     int detect = 0;
 
     for (int j = 0; j < rows; j++) {
-        if (data[j].phase_A >= limit ) detect++;
+        if (data[j].phase_A >= limit )
+            detect++;
     }
-    if (detect == 0) {
-        printf("\n\n No clipping detected");
-    } else {
-        printf("\n\n clipping detected at Timestamp :");
-        for (int j = 0; j < rows; j++) {
-            (data[j].phase_A >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
-        }
-    }
+    return detect;
 }
-void Detect_clipping_B(double limit,int rows,Waveform *data) {
-int detect = 0;
-
-    for (int j = 0; j < rows; j++) {
-        if (data[j].phase_B >= limit ) detect++;
-    }
-    if (detect == 0) {
-        printf("\n\n No clipping detected");
-    } else {
-        printf("\n\n clipping detected at Timestamp:");
-        for (int j = 0; j < rows; j++) {
-            (data[j].phase_B >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
-        }
-    }
-}
-void Detect_clipping_C(double limit,int rows,Waveform *data) {
+int Detect_clipping_B(double limit,int rows,Waveform *data) {
     int detect = 0;
 
     for (int j = 0; j < rows; j++) {
-        if (data[j].phase_C >= limit ) detect++;
+        if (data[j].phase_B >= limit )
+            detect++;
     }
-    if (detect == 0) {
-        printf("\n\n No clipping detected");
-    } else {
-        printf("\n\n clipping detected at Timestamp :");
-        for (int j = 0; j < rows; j++) {
-            (data[j].phase_C >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
-        }
+    return detect;
+}
+int Detect_clipping_C(double limit,int rows,Waveform *data) {
+    int detect = 0;
+
+    for (int j = 0; j < rows; j++) {
+        if (data[j].phase_C >= limit )
+            detect++;
     }
+    return detect;
 }
 
 int tolerance_check(int rows, int voltage, int tolerance, double rms) {
@@ -275,3 +255,51 @@ double variance_C(int rows,Waveform *data) {
 
     return variance;
 }
+
+
+/*void Detect_clipping_A(double limit,int rows,Waveform *data) {
+int detect = 0;
+
+for (int j = 0; j < rows; j++) {
+if (data[j].phase_A >= limit ) detect++;
+}
+if (detect == 0) {
+printf("\n\n No clipping detected");
+} else {
+printf("\n\n clipping detected at Timestamp :");
+for (int j = 0; j < rows; j++) {
+(data[j].phase_A >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
+}
+}
+}
+void Detect_clipping_B(double limit,int rows,Waveform *data) {
+int detect = 0;
+
+for (int j = 0; j < rows; j++) {
+if (data[j].phase_B >= limit ) detect++;
+}
+if (detect == 0) {
+printf("\n\n No clipping detected");
+} else {
+printf("\n\n clipping detected at Timestamp:");
+for (int j = 0; j < rows; j++) {
+(data[j].phase_B >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
+}
+}
+}
+void Detect_clipping_C(double limit,int rows,Waveform *data) {
+int detect = 0;
+
+for (int j = 0; j < rows; j++) {
+if (data[j].phase_C >= limit ) detect++;
+}
+if (detect == 0) {
+printf("\n\n No clipping detected");
+} else {
+printf("\n\n clipping detected at Timestamp :");
+for (int j = 0; j < rows; j++) {
+(data[j].phase_C >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
+}
+}
+}
+*/
