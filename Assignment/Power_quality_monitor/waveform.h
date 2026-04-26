@@ -33,13 +33,6 @@ double variance_A(int rows,Waveform *data);
 double variance_B(int rows,Waveform *data);
 double variance_C(int rows,Waveform *data);
 
-double get_A(Waveform w);
-double get_B(Waveform w);
-double get_C(Waveform w);
-
-/* sorting function */
-typedef double (*ValueFunc)(Waveform);
-void insertionSort(int rows, Waveform *data, ValueFunc getValue);
 
 void csv_close(Waveform *data);
 
