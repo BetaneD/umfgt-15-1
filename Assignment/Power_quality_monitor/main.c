@@ -17,7 +17,7 @@ int main(void)
     print_data_B(rows, data, fp);
     printf("Entering Phase C\n");
     print_data_C(rows, data, fp);
-    insertionSort(rows,data);
+   // insertionSort(rows,data);
     fclose(fp);
 
   csv_close(data);

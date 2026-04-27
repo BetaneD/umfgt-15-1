@@ -255,8 +255,34 @@ double variance_C(int rows,Waveform *data) {
 
     return variance;
 }
+double get_A(Waveform w) { return w.phase_A; }
+double get_B(Waveform w) { return w.phase_B; }
+double get_C(Waveform w) { return w.phase_C; }
 
+/*void insertionSort(int rows, Waveform *data, ValueFunc getValue)
+{
+    for (int i = 1; i < rows; i++)
+    {
+        Waveform key = data[i];
+        double keyVal = getValue(key);
 
+        int j = i - 1;
+
+        while (j >= 0 && getValue(data[j]) > keyVal)
+        {
+            data[j + 1] = data[j];
+            j--;
+        }
+
+        data[j + 1] = key;
+    }
+
+    for (int i = 0; i < rows; i++)
+    {
+        printf("%f\n", getValue(data[i]));
+    }
+}
+*/
 /*void Detect_clipping_A(double limit,int rows,Waveform *data) {
 int detect = 0;
 
