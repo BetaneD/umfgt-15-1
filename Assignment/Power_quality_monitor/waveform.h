@@ -19,7 +19,7 @@ double DC_offset_A(int rows,Waveform *data);
 double DC_offset_B(int rows,Waveform *data);
 double DC_offset_C(int rows,Waveform *data);
 
-int Detect_clipping_A(double limit,int rows,Waveform *data);
+double* Detect_clipping_A(double limit,int rows,Waveform *data);
 int Detect_clipping_B(double limit,int rows,Waveform *data);
 int Detect_clipping_C(double limit,int rows,Waveform *data);
 

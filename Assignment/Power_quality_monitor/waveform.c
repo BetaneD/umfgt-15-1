@@ -7,6 +7,8 @@
 
 #include <stdbool.h>
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 double rms_A (int rows,Waveform *data) {
 
@@ -104,15 +106,33 @@ double DC_offset_C(int rows,Waveform *data) {
 }
 
 
-int Detect_clipping_A(double limit,int rows,Waveform *data) {
+double* Detect_clipping_A(double limit,int rows,Waveform *data) {
+
     int detect = 0;
 
     for (int j = 0; j < rows; j++) {
         if (data[j].phase_A >= limit )
-            detect++;
+        detect++;
     }
-    return detect;
+
+    double* array_A = (double *)malloc(detect * sizeof(double ));
+
+    if (array_A == NULL) {
+
+        printf("ERROR: check Detect clipping A \n");
+        exit(1); // Exit the program if allocation fails
+    }
+
+    for (int j = 0; j < rows; j++) {
+        if (data[j].phase_A >= limit )
+            array_A[j] = data[j].phase_A;
+        detect++;
+    }
+
+    return array_A;
 }
+
+
 int Detect_clipping_B(double limit,int rows,Waveform *data) {
     int detect = 0;
 
