@@ -12,7 +12,7 @@
 Waveform* csv_open(int *rows) {
     int i = 0;
 
-    FILE *fptr = fopen("power_quality_log.csv", "r");
+    FILE *fptr = fopen("../power_quality_log.csv", "r");
 
     if (fptr==NULL) {
         printf("ERROR OPENING FILE: check csv file\n");
@@ -93,12 +93,16 @@ void print_data_A(int rows, Waveform *data, FILE *fp) {
   double amplitudeA = amplitude_A(rows,data);
   fprintf(fp,"\n the amplitude of phase A is %.2lf", amplitudeA);
 
-  int clippingA= Detect_clipping_A(324.9,rows,data);
+  double* clippingA= Detect_clipping_A(324.9,rows,data);
+
     if (clippingA <= 0) {
         fprintf(fp,"\n clipping not detected");
     } else {
-        fprintf(fp,"\n clipping detected at %d ", clippingA);
-        fprintf(fp,"timestamps");
+        fprintf(fp,"\n clipping detected at timestamps :");
+        for (int i = 0; i < rows; i++) {
+
+            if (clippingA[i] != 324.9) printf("\n %lf ", clippingA[i]);
+        }
     }
 
   double DC_offsetA = DC_offset_A(rows,data);
