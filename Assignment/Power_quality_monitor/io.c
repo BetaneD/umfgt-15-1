@@ -93,26 +93,28 @@ void print_data_A(int rows, Waveform *data, FILE *fp) {
   double amplitudeA = amplitude_A(rows,data);
   fprintf(fp,"\n the amplitude of phase A is %.2lf", amplitudeA);
 
-  double* clippingA= Detect_clipping_A(324.9,rows,data);
+  int count = 0;
+  double* clippingA = Detect_clipping_A(324.9, rows, data, &count);
 
-    if (clippingA <= 0) {
-        fprintf(fp,"\n clipping not detected");
+    if (count == 0) {
+        fprintf(fp, "\n clipping not detected");
     } else {
-        fprintf(fp,"\n clipping detected at timestamps :");
-        for (int i = 0; i < rows; i++) {
-
-            if (clippingA[i] != 324.9) printf("\n %lf ", clippingA[i]);
+        fprintf(fp, "\n clipping detected at timestamp :\n");
+        for (int i = 0; i < count; i++) {
+            fprintf(fp, "\n %lf", clippingA[i]);
         }
     }
 
   double DC_offsetA = DC_offset_A(rows,data);
-  fprintf(fp,"\n the DC offset of phase A is %.2lf", DC_offsetA);
+  fprintf(fp,"\n\n the DC offset of phase A is %.2lf", DC_offsetA);
 
-  double STDEVA = STDEV_A(rows,data);
-  fprintf(fp,"\n the STDEV of phase A is %.2lf", STDEVA);
+    double meanA = mean_A(rows,data);
 
-  double VarianceA = variance_A(rows,data);
-  fprintf(fp,"\n the variance of phase A is %.2lf", VarianceA);
+    double VarianceA = variance_A(rows,data, meanA);
+    fprintf(fp,"\n the variance of phase A is %.2lf", VarianceA);
+
+    double STDEVC = STDEV_C(rows,VarianceA);
+    fprintf(fp,"\n the STDEV of phase A is %.2lf", STDEVC);
 
 }
 
@@ -135,23 +137,28 @@ void print_data_B(int rows, Waveform *data, FILE *fp) {
   double amplitudeB = amplitude_B(rows,data);
   fprintf(fp,"\n the amplitude of phase B is %.2lf", amplitudeB);
 
-  int clippingB= Detect_clipping_B(324.9,rows,data);
-    if (clippingB <= 0) {
-        fprintf(fp,"\n clipping not detected");
+  int count = 0;
+  double* clippingB = Detect_clipping_B(324.9, rows, data, &count);
+
+    if (count == 0) {
+        fprintf(fp, "\n clipping not detected");
     } else {
-        fprintf(fp,"\n clipping detected at %d ", clippingB);
-        fprintf(fp,"timestamps");
+        fprintf(fp, "\n clipping detected at timestamp :\n");
+        for (int i = 0; i < count; i++) {
+            fprintf(fp, "\n %lf", clippingB[i]);
+        }
     }
 
   double DC_offsetB = DC_offset_B(rows,data);
-  fprintf(fp,"\n the DC offset of phase B is %.2lf", DC_offsetB);
+  fprintf(fp,"\n\n the DC offset of phase B is %.2lf", DC_offsetB);
 
-  double STDEVB = STDEV_B(rows,data);
-  fprintf(fp,"\n the STDEV of phase B is %.2lf", STDEVB);
+    double meanB = mean_B(rows,data);
 
-  double VarianceB = variance_B(rows,data);
-  fprintf(fp,"\n the variance of phase B is %.2lf", VarianceB);
+    double VarianceB = variance_A(rows,data, meanB);
+    fprintf(fp,"\n the variance of phase B is %.2lf", VarianceB);
 
+    double STDEVC = STDEV_C(rows,VarianceB);
+    fprintf(fp,"\n the STDEV of phase B is %.2lf", STDEVC);
 }
 
 void print_data_C(int rows, Waveform *data, FILE *fp) {
@@ -173,24 +180,34 @@ void print_data_C(int rows, Waveform *data, FILE *fp) {
   double amplitudeC = amplitude_C(rows,data);
     fprintf(fp,"\n the amplitude of phase B is %.2lf", amplitudeC);
 
-  int clippingC= Detect_clipping_C(324.9,rows,data);
-    if (clippingC <= 0) {
-        fprintf(fp,"\n clipping not detected");
+    int count = 0;
+    double* clippingC = Detect_clipping_C(324.9, rows, data, &count);
+
+    if (count == 0) {
+        fprintf(fp, "\n clipping not detected");
     } else {
-        fprintf(fp,"\n clipping detected at %d ", clippingC);
-        fprintf(fp,"timestamps");
+        fprintf(fp, "\n clipping detected at timestamp :\n");
+        for (int i = 0; i < count; i++) {
+            fprintf(fp, "\n %lf", clippingC[i]);
+        }
     }
 
   double DC_offsetC = DC_offset_C(rows,data);
-    fprintf(fp,"\n the DC offset of phase C is %.2lf", DC_offsetC);
+    fprintf(fp,"\n\n the DC offset of phase C is %.2lf", DC_offsetC);
 
-  double STDEVC = STDEV_C(rows,data);
-    fprintf(fp,"\n the STDEV of phase C is %.2lf", STDEVC);
+  double meanC = mean_C(rows,data);
 
-  double VarianceC = variance_C(rows,data);
+  double VarianceC = variance_A(rows,data, meanC);
     fprintf(fp,"\n the variance of phase C is %.2lf", VarianceC);
 
+  double STDEVC = STDEV_C(rows,VarianceC);
+    fprintf(fp,"\n the STDEV of phase C is %.2lf", STDEVC);
+
+
+
+
 }
+
 
 
 void csv_close(Waveform *data) {

@@ -19,27 +19,24 @@ double DC_offset_A(int rows,Waveform *data);
 double DC_offset_B(int rows,Waveform *data);
 double DC_offset_C(int rows,Waveform *data);
 
-double* Detect_clipping_A(double limit,int rows,Waveform *data);
-int Detect_clipping_B(double limit,int rows,Waveform *data);
-int Detect_clipping_C(double limit,int rows,Waveform *data);
+double* Detect_clipping_A(double limit, int rows, Waveform *data, int *count);
+double* Detect_clipping_B(double limit, int rows, Waveform *data, int *count);
+double* Detect_clipping_C(double limit, int rows, Waveform *data, int *count);
 
 int tolerance_check(int rows, int voltage, int tolerance, double rms);
 
-double STDEV_A(int rows,Waveform *data);
-double STDEV_B(int rows,Waveform *data);
-double STDEV_C(int rows,Waveform *data);
+double mean_A(int rows,Waveform *data);
+double mean_B(int rows,Waveform *data);
+double mean_C(int rows,Waveform *data);
 
-double variance_A(int rows,Waveform *data);
-double variance_B(int rows,Waveform *data);
-double variance_C(int rows,Waveform *data);
+double variance_A(int rows,Waveform *data,double mean_A);
+double variance_B(int rows,Waveform *data,double mean_B);
+double variance_C(int rows,Waveform *data,double mean_c);
 
-double get_A(Waveform w);
-double get_B(Waveform w);
-double get_C(Waveform w);
-/* sorting function */
-/*typedef double (*ValueFunc)(Waveform);
-void insertionSort(int rows, Waveform *data, ValueFunc getValue);
-*/
+double STDEV_A(int rows,double variance_A);
+double STDEV_B(int rows,double variance_B);
+double STDEV_C(int rows,double variance_C);
+
 void csv_close(Waveform *data);
 
 #endif //UMFGT_15_1_WAVEFORM_H

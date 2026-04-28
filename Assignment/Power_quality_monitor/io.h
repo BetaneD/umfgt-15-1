@@ -23,7 +23,7 @@ Waveform* csv_open(int *rows);
 void print_data_A(int rows, Waveform *data, FILE *fp);
 void print_data_B(int rows, Waveform *data, FILE *fp);
 void print_data_C(int rows, Waveform *data, FILE *fp);
-//void insertionSort(int rows,Waveform *data);
+
 
 
 #endif //UMFGT_15_1_IO_H

@@ -106,50 +106,83 @@ double DC_offset_C(int rows,Waveform *data) {
 }
 
 
-double* Detect_clipping_A(double limit,int rows,Waveform *data) {
+double* Detect_clipping_A(double limit, int rows, Waveform *data, int *count) {
 
     int detect = 0;
 
     for (int j = 0; j < rows; j++) {
-        if (data[j].phase_A >= limit )
-        detect++;
+        if (data[j].phase_A >= limit)
+            detect++;
     }
 
-    double* array_A = (double *)malloc(detect * sizeof(double ));
+    double* array_A = malloc(detect * sizeof(double));
 
     if (array_A == NULL) {
-
-        printf("ERROR: check Detect clipping A \n");
-        exit(1); // Exit the program if allocation fails
+        printf("ERROR: check Detect clipping A\n");
+        exit(1);
     }
 
+    int k = 0;
     for (int j = 0; j < rows; j++) {
-        if (data[j].phase_A >= limit )
-            array_A[j] = data[j].phase_A;
-        detect++;
+        if (data[j].phase_A >= limit) {
+            array_A[k++] = data[j].timestamp;
+        }
     }
 
+     *count = detect;
     return array_A;
 }
+double* Detect_clipping_B(double limit, int rows, Waveform *data, int *count) {
 
-
-int Detect_clipping_B(double limit,int rows,Waveform *data) {
     int detect = 0;
 
     for (int j = 0; j < rows; j++) {
-        if (data[j].phase_B >= limit )
+        if (data[j].phase_B >= limit)
             detect++;
     }
-    return detect;
+
+    double* array_B = malloc(detect * sizeof(double));
+
+    if (array_B == NULL) {
+        printf("ERROR: check Detect clipping B\n");
+        exit(1);
+    }
+
+    int k = 0;
+    for (int j = 0; j < rows; j++) {
+        if (data[j].phase_B >= limit) {
+            array_B[k++] = data[j].timestamp;
+        }
+    }
+
+    *count = detect;
+    return array_B;
 }
-int Detect_clipping_C(double limit,int rows,Waveform *data) {
+double* Detect_clipping_C(double limit, int rows, Waveform *data, int *count) {
+
     int detect = 0;
 
     for (int j = 0; j < rows; j++) {
-        if (data[j].phase_C >= limit )
+        if (data[j].phase_C >= limit)
             detect++;
     }
-    return detect;
+
+    double* array_C = malloc(detect * sizeof(double));
+
+    if (array_C == NULL) {
+        printf("ERROR: check Detect clipping C\n");
+        exit(1);
+    }
+
+    int k = 0;
+    for (int j = 0; j < rows; j++) {
+        if (data[j].phase_C >= limit) {
+            array_C[k++] = data[j].timestamp;
+        }
+    }
+
+    *count = detect;
+    return array_C;
 }
 
 int tolerance_check(int rows, int voltage, int tolerance, double rms) {
@@ -162,190 +195,87 @@ int tolerance_check(int rows, int voltage, int tolerance, double rms) {
     return in_tolerance;
 }
 
-double STDEV_A(int rows,Waveform *data) {
+double mean_A(int rows,Waveform *data) {
+    double mean = 0.0;
+
+    for (int j = 0; j < rows; j++) {
+    mean += data[j].phase_A;
+}
+
+    return mean/rows;
+}
+double mean_B(int rows,Waveform *data) {
 
     double mean = 0.0;
+
+    for (int j = 0; j < rows; j++) mean += data[j].phase_B;
+
+    return mean/rows;
+}
+double mean_C(int rows,Waveform *data) {
+
+    double mean = 0.0;
+
+    for (int j = 0; j < rows; j++) mean += data[j].phase_C;
+
+    return mean/rows;
+}
+
+double variance_A(int rows,Waveform *data,double mean) {
+    double variance = 0.0;
+
+    for (int j = 0; j < rows; j++) {
+        double distance = data[j].phase_A - mean;
+        variance += distance * distance;
+    }
+    variance = variance/rows;
+
+    return variance;
+}
+double variance_B(int rows,Waveform *data,double mean) {
+    double variance = 0.0;
+
+    for (int j = 0; j < rows; j++) {
+        double distance = data[j].phase_B - mean;
+        variance += distance * distance;
+    }
+    variance = variance/rows;
+
+    return variance;
+}
+double variance_C(int rows,Waveform *data,double mean) {
+    double variance = 0.0;
+
+    for (int j = 0; j < rows; j++) {
+        double distance = data[j].phase_C - mean;
+        variance += distance * distance;
+    }
+    variance = variance/rows;
+
+    return variance;
+}
+
+double STDEV_A(int rows,double variance_A) {
+
     double stdev = 0.0;
 
-    for (int j = 0; j < rows; j++) {
-        mean += data[j].phase_A;
-    }
-
-    if (rows > 0) mean = mean /rows;
-
-    for (int j = 0; j < rows; j++) {
-        const double distance = data[j].phase_A - mean;
-        stdev += distance * distance;
-    }
-    stdev = sqrt(stdev/rows);
+    stdev = sqrt(variance_A);
 
     return stdev;
 }
-double STDEV_B(int rows,Waveform *data) {
+double STDEV_B(int rows,double variance_B) {
 
-    double mean = 0.0;
     double stdev = 0.0;
 
-    for (int j = 0; j < rows; j++) {
-        mean += data[j].phase_B;
-    }
+    stdev = sqrt(variance_B);
 
-    if (rows > 0) mean = mean /rows;
-
-    for (int j = 0; j < rows; j++) {
-        const double distance = data[j].phase_B - mean;
-        stdev += distance * distance;
-    }
-    stdev = sqrt(stdev/rows);
-
-   return stdev;
+    return stdev;
 }
-double STDEV_C(int rows,Waveform *data) {
+double STDEV_C(int rows,double variance_C) {
 
-    double mean = 0.0;
     double stdev = 0.0;
 
-    for (int j = 0; j < rows; j++) {
-        mean += data[j].phase_C;
-    }
+    stdev = sqrt(variance_C);
 
-    if (rows > 0) mean = mean /rows;
-
-    for (int j = 0; j < rows; j++) {
-        const double distance = data[j].phase_C - mean;
-        stdev += distance * distance;
-    }
-
-    stdev = sqrt(stdev/rows);
-
-   return stdev;
+    return stdev;
 }
-
-double variance_A(int rows,Waveform *data) {
-    double mean = 0.0;
-    double variance = 0.0;
-
-    for (int j = 0; j < rows; j++) {
-        mean += data[j].phase_A;
-    }
-
-    if (rows > 0) mean = mean /rows;
-
-    for (int j = 0; j < rows; j++) {
-        const double distance = data[j].phase_A - mean;
-        variance += distance * distance;
-    }
-    variance = variance/rows;
-
-    return variance;
-}
-double variance_B(int rows,Waveform *data) {
-    double mean = 0.0;
-    double variance = 0.0;
-
-    for (int j = 0; j < rows; j++) {
-        mean += data[j].phase_B;
-    }
-
-    if (rows > 0) mean = mean /rows;
-
-    for (int j = 0; j < rows; j++) {
-        const double distance = data[j].phase_B - mean;
-        variance += distance * distance;
-    }
-    variance = variance/rows;
-
-    return variance;
-}
-double variance_C(int rows,Waveform *data) {
-    double mean = 0.0;
-    double variance = 0.0;
-
-    for (int j = 0; j < rows; j++) {
-        mean += data[j].phase_C;
-    }
-
-    if (rows > 0) mean = mean /rows;
-
-    for (int j = 0; j < rows; j++) {
-        const double distance = data[j].phase_C - mean;
-        variance += distance * distance;
-    }
-    variance = variance/rows;
-
-    return variance;
-}
-double get_A(Waveform w) { return w.phase_A; }
-double get_B(Waveform w) { return w.phase_B; }
-double get_C(Waveform w) { return w.phase_C; }
-
-/*void insertionSort(int rows, Waveform *data, ValueFunc getValue)
-{
-    for (int i = 1; i < rows; i++)
-    {
-        Waveform key = data[i];
-        double keyVal = getValue(key);
-
-        int j = i - 1;
-
-        while (j >= 0 && getValue(data[j]) > keyVal)
-        {
-            data[j + 1] = data[j];
-            j--;
-        }
-
-        data[j + 1] = key;
-    }
-
-    for (int i = 0; i < rows; i++)
-    {
-        printf("%f\n", getValue(data[i]));
-    }
-}
-*/
-/*void Detect_clipping_A(double limit,int rows,Waveform *data) {
-int detect = 0;
-
-for (int j = 0; j < rows; j++) {
-if (data[j].phase_A >= limit ) detect++;
-}
-if (detect == 0) {
-printf("\n\n No clipping detected");
-} else {
-printf("\n\n clipping detected at Timestamp :");
-for (int j = 0; j < rows; j++) {
-(data[j].phase_A >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
-}
-}
-}
-void Detect_clipping_B(double limit,int rows,Waveform *data) {
-int detect = 0;
-
-for (int j = 0; j < rows; j++) {
-if (data[j].phase_B >= limit ) detect++;
-}
-if (detect == 0) {
-printf("\n\n No clipping detected");
-} else {
-printf("\n\n clipping detected at Timestamp:");
-for (int j = 0; j < rows; j++) {
-(data[j].phase_B >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
-}
-}
-}
-void Detect_clipping_C(double limit,int rows,Waveform *data) {
-int detect = 0;
-
-for (int j = 0; j < rows; j++) {
-if (data[j].phase_C >= limit ) detect++;
-}
-if (detect == 0) {
-printf("\n\n No clipping detected");
-} else {
-printf("\n\n clipping detected at Timestamp :");
-for (int j = 0; j < rows; j++) {
-(data[j].phase_C >= limit )? printf("\n \t %f",data[j].timestamp):printf("");
-}
-}
-}
-*/
