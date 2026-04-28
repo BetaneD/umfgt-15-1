@@ -279,3 +279,91 @@ double STDEV_C(int rows,double variance_C) {
 
     return stdev;
 }
+
+double* insertionSort_A(int rows, Waveform *data){
+    double* sort_A = malloc(rows * sizeof(double));
+
+    if (sort_A == NULL) {
+        printf("ERROR: check insertionSort A\n");
+        exit(1);
+    }
+
+    for (int i = 0; i < rows; i++) {
+        sort_A[i] = data[i].phase_A;
+    }
+
+    for (int i = 1; i < rows; i++)
+    {
+        double key = sort_A[i];
+
+        int j = i - 1;
+
+        while (j >= 0 && fabs(sort_A[j]) > fabs(key))
+        {
+            sort_A[j + 1] = sort_A[j];
+            j = j - 1;
+        }
+
+        sort_A[j + 1] = key;
+    }
+
+    return sort_A;
+}
+double* insertionSort_B(int rows, Waveform *data){
+    double* sort_B = malloc(rows * sizeof(double));
+
+    if (sort_B == NULL) {
+        printf("ERROR: check insertionSort A\n");
+        exit(1);
+    }
+
+    for (int i = 0; i < rows; i++) {
+        sort_B[i] = data[i].phase_B;
+    }
+
+    for (int i = 1; i < rows; i++)
+    {
+        double key = sort_B[i];
+
+        int j = i - 1;
+
+        while (j >= 0 && fabs(sort_B[j]) > fabs(key))
+        {
+            sort_B[j + 1] = sort_B[j];
+            j = j - 1;
+        }
+
+        sort_B[j + 1] = key;
+    }
+
+    return sort_B;
+}
+double* insertionSort_C(int rows, Waveform *data){
+    double* sort_C = malloc(rows * sizeof(double));
+
+    if (sort_C == NULL) {
+        printf("ERROR: check insertionSort A\n");
+        exit(1);
+    }
+
+    for (int i = 0; i < rows; i++) {
+        sort_C[i] = data[i].phase_C;
+    }
+
+    for (int i = 1; i < rows; i++)
+    {
+        double key = sort_C[i];
+
+        int j = i - 1;
+
+        while (j >= 0 && fabs(sort_C[j]) > fabs(key))
+        {
+            sort_C[j + 1] = sort_C[j];
+            j = j - 1;
+        }
+
+        sort_C[j + 1] = key;
+    }
+
+    return sort_C;
+}

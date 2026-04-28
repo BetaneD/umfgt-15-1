@@ -203,11 +203,33 @@ void print_data_C(int rows, Waveform *data, FILE *fp) {
   double STDEVC = STDEV_C(rows,VarianceC);
     fprintf(fp,"\n the STDEV of phase C is %.2lf", STDEVC);
 
-
-
-
 }
 
+void print_sort(int rows, Waveform *data, FILE *fp) {
+    if (fp == NULL) {
+        printf("ERROR OPENING FILE: check csv file\n");
+        exit(1);
+    }
+
+    ///// PHASE C /////
+    fprintf(fp,"\n\n\t---Value sorted by magnitude---");
+
+    double* sortA = insertionSort_A(rows,data);
+    double* sortB = insertionSort_A(rows,data);
+    double* sortC = insertionSort_A(rows,data);
+
+    for (int i = 0; i < rows; i++)
+    {
+        fprintf(fp,"\n phase_A: %.2lf | phase_B: %.2lf | phase_C: %.2lf",
+        sortA[i],
+        sortB[i],
+        sortC[i]
+        );
+
+    }
+    printf("\n");
+
+}
 
 
 void csv_close(Waveform *data) {
