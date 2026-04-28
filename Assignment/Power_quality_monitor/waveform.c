@@ -185,10 +185,10 @@ double* Detect_clipping_C(double limit, int rows, Waveform *data, int *count) {
     return array_C;
 }
 
-int tolerance_check(int rows, int voltage, int tolerance, double rms) {
+bool tolerance_check(int voltage, int tolerance, double rms) {
 
-    int vmax = voltage + (voltage/tolerance);
-    int vmin = voltage - (voltage/tolerance);
+    double vmax = voltage + (voltage*tolerance/100);
+    double vmin = voltage - (voltage*tolerance/100);
 
     bool in_tolerance = vmin <= rms && rms <= vmax;
 

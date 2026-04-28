@@ -87,8 +87,12 @@ void print_data_A(int rows, Waveform *data, FILE *fp) {
   double phase_A_rms = rms_A(rows, data);
   fprintf(fp,"\n\n the RMS of phase A is %.2lf", phase_A_rms);
 
-  double toleranceA = tolerance_check(rows,230,10,phase_A_rms);
-  fprintf(fp,"\n the tolerance of phase A is %.2lf", toleranceA);
+  bool toleranceA = tolerance_check(230,10,phase_A_rms);
+    if (toleranceA) {
+        fprintf(fp,"\n In tolerance : YES");
+    } else {
+        fprintf(fp,"\n In tolerance : NO");
+    }
 
   double amplitudeA = amplitude_A(rows,data);
   fprintf(fp,"\n the amplitude of phase A is %.2lf", amplitudeA);
@@ -131,8 +135,12 @@ void print_data_B(int rows, Waveform *data, FILE *fp) {
   double phase_B_rms = rms_B(rows, data);
   fprintf(fp,"\n\n the RMS of phase B is %.2lf", phase_B_rms);
 
-  double toleranceB = tolerance_check(rows,230,10,phase_B_rms);
-  fprintf(fp,"\n the tolerance of phase B is %.2lf", toleranceB);
+  bool toleranceB = tolerance_check(230,10,phase_B_rms);
+    if (toleranceB) {
+        fprintf(fp,"\n In tolerance : YES");
+    } else {
+        fprintf(fp,"\n In tolerance : NO");
+    }
 
   double amplitudeB = amplitude_B(rows,data);
   fprintf(fp,"\n the amplitude of phase B is %.2lf", amplitudeB);
@@ -174,8 +182,12 @@ void print_data_C(int rows, Waveform *data, FILE *fp) {
   double phase_C_rms = rms_C(rows, data);
     fprintf(fp,"\n\n the RMS of phase B is %.2lf", phase_C_rms);
 
-  double toleranceC = tolerance_check(rows,230,10,phase_C_rms);
-    fprintf(fp,"\n the tolerance of phase C is %.2lf", toleranceC);
+  bool toleranceC = tolerance_check(230,10,phase_C_rms);
+    if (toleranceC) {
+        fprintf(fp,"\n In tolerance : YES");
+    } else {
+        fprintf(fp,"\n In tolerance : NO");
+    }
 
   double amplitudeC = amplitude_C(rows,data);
     fprintf(fp,"\n the amplitude of phase B is %.2lf", amplitudeC);

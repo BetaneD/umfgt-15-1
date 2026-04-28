@@ -4,6 +4,8 @@
 
 #ifndef UMFGT_15_1_WAVEFORM_H
 #define UMFGT_15_1_WAVEFORM_H
+#include <stdbool.h>
+
 #include "io.h"
 
 
@@ -23,7 +25,7 @@ double* Detect_clipping_A(double limit, int rows, Waveform *data, int *count);
 double* Detect_clipping_B(double limit, int rows, Waveform *data, int *count);
 double* Detect_clipping_C(double limit, int rows, Waveform *data, int *count);
 
-int tolerance_check(int rows, int voltage, int tolerance, double rms);
+bool tolerance_check(int voltage, int tolerance, double rms);
 
 double mean_A(int rows,Waveform *data);
 double mean_B(int rows,Waveform *data);
