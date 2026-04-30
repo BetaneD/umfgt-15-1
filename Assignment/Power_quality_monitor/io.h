@@ -1,7 +1,3 @@
-//
-// Created by Fatima Daudi on 25/04/2026.
-//
-
 #ifndef UMFGT_15_1_IO_H
 #define UMFGT_15_1_IO_H
 

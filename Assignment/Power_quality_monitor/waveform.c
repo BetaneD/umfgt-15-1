@@ -1,7 +1,3 @@
-//
-// Created by Fatima Daudi on 25/04/2026.
-//
-
 #include "waveform.h"
 #include "io.h"
 
@@ -81,8 +77,7 @@ double DC_offset_A(int rows,Waveform *data) {
     for (int j = 0; j < rows; j++) {
         offset += data[j].phase_A;
     }
-    offset = offset/rows;
-    return offset;
+    return offset/rows;
 }
 double DC_offset_B(int rows,Waveform *data) {
 
@@ -91,8 +86,7 @@ double DC_offset_B(int rows,Waveform *data) {
     for (int j = 0; j < rows; j++) {
         offset += data[j].phase_B;
     }
-    offset = offset/rows;
-    return offset;
+    return offset/rows;
 }
 double DC_offset_C(int rows,Waveform *data) {
 
@@ -101,8 +95,7 @@ double DC_offset_C(int rows,Waveform *data) {
     for (int j = 0; j < rows; j++) {
         offset += data[j].phase_C;
     }
-    offset = offset/rows;
-    return offset;
+    return offset/rows;
 }
 
 
@@ -129,7 +122,7 @@ double* Detect_clipping_A(double limit, int rows, Waveform *data, int *count) {
         }
     }
 
-     *count = detect;
+    *count = detect;
     return array_A;
 }
 double* Detect_clipping_B(double limit, int rows, Waveform *data, int *count) {
@@ -190,17 +183,13 @@ bool tolerance_check(int voltage, int tolerance, double rms) {
     double vmax = voltage + (voltage*tolerance/100);
     double vmin = voltage - (voltage*tolerance/100);
 
-    bool in_tolerance = vmin <= rms && rms <= vmax;
-
-    return in_tolerance;
+    return vmin <= rms && rms <= vmax;
 }
 
 double mean_A(int rows,Waveform *data) {
     double mean = 0.0;
 
-    for (int j = 0; j < rows; j++) {
-    mean += data[j].phase_A;
-}
+    for (int j = 0; j < rows; j++) mean += data[j].phase_A;
 
     return mean/rows;
 }
@@ -228,9 +217,7 @@ double variance_A(int rows,Waveform *data,double mean) {
         double distance = data[j].phase_A - mean;
         variance += distance * distance;
     }
-    variance = variance/rows;
-
-    return variance;
+    return variance/rows;
 }
 double variance_B(int rows,Waveform *data,double mean) {
     double variance = 0.0;
@@ -239,9 +226,7 @@ double variance_B(int rows,Waveform *data,double mean) {
         double distance = data[j].phase_B - mean;
         variance += distance * distance;
     }
-    variance = variance/rows;
-
-    return variance;
+    return variance/rows;
 }
 double variance_C(int rows,Waveform *data,double mean) {
     double variance = 0.0;
@@ -250,34 +235,26 @@ double variance_C(int rows,Waveform *data,double mean) {
         double distance = data[j].phase_C - mean;
         variance += distance * distance;
     }
-    variance = variance/rows;
-
-    return variance;
+    return variance/rows;
 }
 
 double STDEV_A(int rows,double variance_A) {
 
     double stdev = 0.0;
 
-    stdev = sqrt(variance_A);
-
-    return stdev;
+    return sqrt(variance_A);
 }
 double STDEV_B(int rows,double variance_B) {
 
     double stdev = 0.0;
 
-    stdev = sqrt(variance_B);
-
-    return stdev;
+    return sqrt(variance_B);
 }
 double STDEV_C(int rows,double variance_C) {
 
     double stdev = 0.0;
 
-    stdev = sqrt(variance_C);
-
-    return stdev;
+    return sqrt(variance_C);
 }
 
 double* insertionSort_A(int rows, Waveform *data){
@@ -306,7 +283,6 @@ double* insertionSort_A(int rows, Waveform *data){
 
         sort_A[j + 1] = key;
     }
-
     return sort_A;
 }
 double* insertionSort_B(int rows, Waveform *data){
@@ -335,7 +311,6 @@ double* insertionSort_B(int rows, Waveform *data){
 
         sort_B[j + 1] = key;
     }
-
     return sort_B;
 }
 double* insertionSort_C(int rows, Waveform *data){
@@ -364,6 +339,5 @@ double* insertionSort_C(int rows, Waveform *data){
 
         sort_C[j + 1] = key;
     }
-
     return sort_C;
 }
