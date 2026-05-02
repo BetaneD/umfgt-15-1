@@ -4,7 +4,7 @@
 #include "io.h"
 
  // Driver code
-int main(void)
+int main(int argc, char * argv[])
 {
 
     int rows = 0;

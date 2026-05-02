@@ -8,7 +8,7 @@
 Waveform* csv_open(int *rows) {
     int i = 0;
 
-    FILE *fptr = fopen("power_quality_log.csv", "r");
+    FILE *fptr = fopen("../power_quality_log.csv", "r");
 
     if (fptr==NULL) {
         printf("ERROR OPENING FILE: check csv file\n");
