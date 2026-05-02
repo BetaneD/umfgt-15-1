@@ -38,8 +38,8 @@ double rms_C (int rows,Waveform *data) {
 
 double amplitude_A (int rows,Waveform *data) {
 
-    double max = 0.0;
-    double min = 0.0;
+    double max = data[0].phase_A;
+    double min = data[0].phase_A;
 
     for (int j = 0; j < rows; j++) {
         max = (max >= data[j].phase_A)? max: data[j].phase_A;
@@ -49,8 +49,8 @@ double amplitude_A (int rows,Waveform *data) {
 }
 double amplitude_B (int rows,Waveform *data) {
 
-    double max = 0.0;
-    double min = 0.0;
+    double max = data[0].phase_B;
+    double min = data[0].phase_B;
 
     for (int j = 0; j < rows; j++) {
         max = (max >= data[j].phase_B)? max: data[j].phase_B;
@@ -60,8 +60,8 @@ double amplitude_B (int rows,Waveform *data) {
 }
 double amplitude_C (int rows,Waveform *data) {
 
-    double max = 0.0;
-    double min = 0.0;
+    double max = data[0].phase_C;
+    double min = data[0].phase_C;
 
     for (int j = 0; j < rows; j++) {
         max = (max >= data[j].phase_C)? max: data[j].phase_C;
@@ -123,6 +123,12 @@ double* Detect_clipping_A(double limit, int rows, Waveform *data, int *count) {
     }
 
     *count = detect;
+
+    if (detect == 0) {
+        *count = 0;
+        return NULL;
+    }
+
     return array_A;
 }
 double* Detect_clipping_B(double limit, int rows, Waveform *data, int *count) {
@@ -149,6 +155,12 @@ double* Detect_clipping_B(double limit, int rows, Waveform *data, int *count) {
     }
 
     *count = detect;
+
+    if (detect == 0) {
+        *count = 0;
+        return NULL;
+    }
+
     return array_B;
 }
 double* Detect_clipping_C(double limit, int rows, Waveform *data, int *count) {
@@ -175,6 +187,12 @@ double* Detect_clipping_C(double limit, int rows, Waveform *data, int *count) {
     }
 
     *count = detect;
+
+    if (detect == 0) {
+        *count = 0;
+        return NULL;
+    }
+
     return array_C;
 }
 
@@ -240,19 +258,13 @@ double variance_C(int rows,Waveform *data,double mean) {
 
 double STDEV_A(int rows,double variance_A) {
 
-    double stdev = 0.0;
-
     return sqrt(variance_A);
 }
 double STDEV_B(int rows,double variance_B) {
 
-    double stdev = 0.0;
-
     return sqrt(variance_B);
 }
 double STDEV_C(int rows,double variance_C) {
-
-    double stdev = 0.0;
 
     return sqrt(variance_C);
 }
@@ -289,7 +301,7 @@ double* insertionSort_B(int rows, Waveform *data){
     double* sort_B = malloc(rows * sizeof(double));
 
     if (sort_B == NULL) {
-        printf("ERROR: check insertionSort A\n");
+        printf("ERROR: check insertionSort B\n");
         exit(1);
     }
 
@@ -317,7 +329,7 @@ double* insertionSort_C(int rows, Waveform *data){
     double* sort_C = malloc(rows * sizeof(double));
 
     if (sort_C == NULL) {
-        printf("ERROR: check insertionSort A\n");
+        printf("ERROR: check insertionSort C\n");
         exit(1);
     }
 

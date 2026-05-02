@@ -15,7 +15,7 @@ typedef struct {
     float thd;
 }Waveform;
 
-Waveform* csv_open(int *rows);
+Waveform* csv_open(int *rows, const char *filename);
 void print_data_A(int rows, Waveform *data, FILE *fp);
 void print_data_B(int rows, Waveform *data, FILE *fp);
 void print_data_C(int rows, Waveform *data, FILE *fp);

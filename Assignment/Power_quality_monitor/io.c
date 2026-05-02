@@ -5,10 +5,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-Waveform* csv_open(int *rows) {
+Waveform* csv_open(int *rows, const char *filename) {
     int i = 0;
 
-    FILE *fptr = fopen("../power_quality_log.csv", "r");
+    FILE *fptr = fopen(filename, "r");
 
     if (fptr==NULL) {
         printf("ERROR OPENING FILE: check csv file\n");
@@ -113,8 +113,10 @@ void print_data_A(int rows, Waveform *data, FILE *fp) {
     double VarianceA = variance_A(rows,data, meanA);
     fprintf(fp,"\n the variance of phase A is %.2lf", VarianceA);
 
-    double STDEVC = STDEV_C(rows,VarianceA);
-    fprintf(fp,"\n the STDEV of phase A is %.2lf", STDEVC);
+    double STDEVA = STDEV_A(rows,VarianceA);
+    fprintf(fp,"\n the STDEV of phase A is %.2lf", STDEVA);
+
+    free(clippingA);
 
 }
 
@@ -158,11 +160,13 @@ void print_data_B(int rows, Waveform *data, FILE *fp) {
 
     double meanB = mean_B(rows,data);
 
-    double VarianceB = variance_A(rows,data, meanB);
+    double VarianceB = variance_B(rows,data, meanB);
     fprintf(fp,"\n the variance of phase B is %.2lf", VarianceB);
 
-    double STDEVC = STDEV_C(rows,VarianceB);
-    fprintf(fp,"\n the STDEV of phase B is %.2lf", STDEVC);
+    double STDEVB = STDEV_B(rows,VarianceB);
+    fprintf(fp,"\n the STDEV of phase B is %.2lf", STDEVB);
+
+    free(clippingB);
 }
 
 void print_data_C(int rows, Waveform *data, FILE *fp) {
@@ -205,11 +209,13 @@ void print_data_C(int rows, Waveform *data, FILE *fp) {
 
   double meanC = mean_C(rows,data);
 
-  double VarianceC = variance_A(rows,data, meanC);
+  double VarianceC = variance_C(rows,data, meanC);
     fprintf(fp,"\n the variance of phase C is %.2lf", VarianceC);
 
   double STDEVC = STDEV_C(rows,VarianceC);
     fprintf(fp,"\n the STDEV of phase C is %.2lf", STDEVC);
+
+    free(clippingC);
 
 }
 
@@ -236,6 +242,9 @@ void print_sort(int rows, Waveform *data, FILE *fp) {
 
     }
     printf("\n");
+    free(sortA);
+    free(sortB);
+    free(sortC);
 
 }
 
