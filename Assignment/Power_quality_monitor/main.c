@@ -5,7 +5,7 @@
  // Driver code
 int main(int argc, char * argv[])
 {
- //power_quality_log.csv
+ //../power_quality_log.csv
 
     int rows = 0;
     Waveform *data = csv_open(&rows, argv[1]);
