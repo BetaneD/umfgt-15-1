@@ -104,7 +104,7 @@ double* Detect_clipping_A(double limit, int rows, Waveform *data, int *count) {
     int detect = 0;
 
     for (int j = 0; j < rows; j++) {
-        if (data[j].phase_A >= limit)
+        if (fabs(data[j].phase_A) >= limit)
             detect++;
     }
 
@@ -117,7 +117,7 @@ double* Detect_clipping_A(double limit, int rows, Waveform *data, int *count) {
 
     int k = 0;
     for (int j = 0; j < rows; j++) {
-        if (data[j].phase_A >= limit) {
+        if (fabs(data[j].phase_A) >= limit) {
             array_A[k++] = data[j].timestamp;
         }
     }
@@ -136,7 +136,7 @@ double* Detect_clipping_B(double limit, int rows, Waveform *data, int *count) {
     int detect = 0;
 
     for (int j = 0; j < rows; j++) {
-        if (data[j].phase_B >= limit)
+        if (fabs(data[j].phase_B) >= limit)
             detect++;
     }
 
@@ -149,7 +149,7 @@ double* Detect_clipping_B(double limit, int rows, Waveform *data, int *count) {
 
     int k = 0;
     for (int j = 0; j < rows; j++) {
-        if (data[j].phase_B >= limit) {
+        if (fabs(data[j].phase_B) >= limit) {
             array_B[k++] = data[j].timestamp;
         }
     }
@@ -168,7 +168,7 @@ double* Detect_clipping_C(double limit, int rows, Waveform *data, int *count) {
     int detect = 0;
 
     for (int j = 0; j < rows; j++) {
-        if (data[j].phase_C >= limit)
+        if (fabs(data[j].phase_C) >= limit)
             detect++;
     }
 
@@ -181,7 +181,7 @@ double* Detect_clipping_C(double limit, int rows, Waveform *data, int *count) {
 
     int k = 0;
     for (int j = 0; j < rows; j++) {
-        if (data[j].phase_C >= limit) {
+        if (fabs(data[j].phase_C) >= limit) {
             array_C[k++] = data[j].timestamp;
         }
     }
@@ -204,31 +204,10 @@ bool tolerance_check(int voltage, int tolerance, double rms) {
     return vmin <= rms && rms <= vmax;
 }
 
-double mean_A(int rows,Waveform *data) {
+double variance_A(int rows,Waveform *data) {
     double mean = 0.0;
 
     for (int j = 0; j < rows; j++) mean += data[j].phase_A;
-
-    return mean/rows;
-}
-double mean_B(int rows,Waveform *data) {
-
-    double mean = 0.0;
-
-    for (int j = 0; j < rows; j++) mean += data[j].phase_B;
-
-    return mean/rows;
-}
-double mean_C(int rows,Waveform *data) {
-
-    double mean = 0.0;
-
-    for (int j = 0; j < rows; j++) mean += data[j].phase_C;
-
-    return mean/rows;
-}
-
-double variance_A(int rows,Waveform *data,double mean) {
     double variance = 0.0;
 
     for (int j = 0; j < rows; j++) {
@@ -237,7 +216,12 @@ double variance_A(int rows,Waveform *data,double mean) {
     }
     return variance/rows;
 }
-double variance_B(int rows,Waveform *data,double mean) {
+double variance_B(int rows,Waveform *data) {
+
+    double mean = 0.0;
+
+    for (int j = 0; j < rows; j++) mean += data[j].phase_B;
+
     double variance = 0.0;
 
     for (int j = 0; j < rows; j++) {
@@ -246,7 +230,11 @@ double variance_B(int rows,Waveform *data,double mean) {
     }
     return variance/rows;
 }
-double variance_C(int rows,Waveform *data,double mean) {
+double variance_C(int rows,Waveform *data) {
+    double mean = 0.0;
+
+    for (int j = 0; j < rows; j++) mean += data[j].phase_C;
+
     double variance = 0.0;
 
     for (int j = 0; j < rows; j++) {

@@ -23,13 +23,9 @@ double* Detect_clipping_C(double limit, int rows, Waveform *data, int *count);
 
 bool tolerance_check(int voltage, int tolerance, double rms);
 
-double mean_A(int rows,Waveform *data);
-double mean_B(int rows,Waveform *data);
-double mean_C(int rows,Waveform *data);
-
-double variance_A(int rows,Waveform *data,double mean_A);
-double variance_B(int rows,Waveform *data,double mean_B);
-double variance_C(int rows,Waveform *data,double mean_c);
+double variance_A(int rows,Waveform *data);
+double variance_B(int rows,Waveform *data);
+double variance_C(int rows,Waveform *data);
 
 double STDEV_A(int rows,double variance_A);
 double STDEV_B(int rows,double variance_B);

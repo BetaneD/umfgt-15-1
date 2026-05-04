@@ -108,9 +108,7 @@ void print_data_A(int rows, Waveform *data, FILE *fp) {
   double DC_offsetA = DC_offset_A(rows,data);
   fprintf(fp,"\n\n the DC offset of phase A is %.2lf", DC_offsetA);
 
-    double meanA = mean_A(rows,data);
-
-    double VarianceA = variance_A(rows,data, meanA);
+    double VarianceA = variance_A(rows,data);
     fprintf(fp,"\n the variance of phase A is %.2lf", VarianceA);
 
     double STDEVA = STDEV_A(rows,VarianceA);
@@ -158,9 +156,7 @@ void print_data_B(int rows, Waveform *data, FILE *fp) {
   double DC_offsetB = DC_offset_B(rows,data);
   fprintf(fp,"\n\n the DC offset of phase B is %.2lf", DC_offsetB);
 
-    double meanB = mean_B(rows,data);
-
-    double VarianceB = variance_B(rows,data, meanB);
+    double VarianceB = variance_B(rows,data);
     fprintf(fp,"\n the variance of phase B is %.2lf", VarianceB);
 
     double STDEVB = STDEV_B(rows,VarianceB);
@@ -207,9 +203,7 @@ void print_data_C(int rows, Waveform *data, FILE *fp) {
   double DC_offsetC = DC_offset_C(rows,data);
     fprintf(fp,"\n\n the DC offset of phase C is %.2lf", DC_offsetC);
 
-  double meanC = mean_C(rows,data);
-
-  double VarianceC = variance_C(rows,data, meanC);
+  double VarianceC = variance_C(rows,data);
     fprintf(fp,"\n the variance of phase C is %.2lf", VarianceC);
 
   double STDEVC = STDEV_C(rows,VarianceC);
