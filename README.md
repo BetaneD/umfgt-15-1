@@ -35,4 +35,4 @@ Go to Run > Edit Configurations and in the Program Arguments type
     
 This is the location of the file to be read.
 
-## You can run the program.
+## You can now run the program.
