@@ -19,6 +19,8 @@ Waveform* csv_open(int *rows, const char *filename) {
 
     fgets(line,sizeof(line), fptr); // skips first line of the csv file
 
+    *rows = 0;
+
     while (fgets(line, sizeof(line), fptr) != NULL) {
         (*rows)++; // counts how many lines there are
     }
@@ -112,7 +114,7 @@ void print_data_A(int rows, Waveform *data, FILE *fp) {
     double VarianceA = variance_A(rows,data); // calling a function
       fprintf(fp,"\n\n the variance of phase A is %.2lf", VarianceA);
 
-    double STDEVA = STDEV_A(rows,VarianceA); // calling a function
+    double STDEVA = STDEV_A(VarianceA); // calling a function
       fprintf(fp,"\n the Standard deviation of phase A is %.2lf", STDEVA);
 
     free(clippingA);
@@ -160,7 +162,7 @@ void print_data_B(int rows, Waveform *data, FILE *fp) {
   double VarianceB = variance_B(rows,data); // calling a function
     fprintf(fp,"\n\n the variance of phase B is %.2lf", VarianceB);
 
-  double STDEVB = STDEV_B(rows,VarianceB); // calling a function
+  double STDEVB = STDEV_B(VarianceB); // calling a function
     fprintf(fp,"\n the Standard deviation of phase B is %.2lf", STDEVB);
 
     free(clippingB);// clears memory used by a malloc
@@ -177,7 +179,7 @@ void print_data_C(int rows, Waveform *data, FILE *fp) {
   fprintf(fp,"\n\n\t---PHASE C---");
 
   double phase_C_rms = rms_C(rows, data); // calling a function
-    fprintf(fp,"\n\n the RMS of phase B is %.2lf", phase_C_rms);
+    fprintf(fp,"\n\n the RMS of phase C is %.2lf", phase_C_rms);
 
   bool toleranceC = tolerance_check(230,10,phase_C_rms); // calling a function
     if (toleranceC) {
@@ -187,7 +189,7 @@ void print_data_C(int rows, Waveform *data, FILE *fp) {
     }
 
   double amplitudeC = amplitude_C(rows,data); // calling a function
-    fprintf(fp,"\n the amplitude of phase B is %.2lf", amplitudeC);
+    fprintf(fp,"\n the amplitude of phase C is %.2lf", amplitudeC);
 
   double DC_offsetC = DC_offset_C(rows,data); // calling a function
     fprintf(fp,"\n the DC offset of phase C is %.2lf", DC_offsetC);
@@ -207,7 +209,7 @@ void print_data_C(int rows, Waveform *data, FILE *fp) {
   double VarianceC = variance_C(rows,data);  // calling a function
     fprintf(fp,"\n\n the variance of phase C is %.2lf", VarianceC);
 
-  double STDEVC = STDEV_C(rows,VarianceC);  // calling a function
+  double STDEVC = STDEV_C(VarianceC);  // calling a function
     fprintf(fp,"\n the Standard deviation of phase C is %.2lf", STDEVC);
 
     free(clippingC);
@@ -246,8 +248,8 @@ void print_sort(int rows, Waveform *data, FILE *fp) {
     fprintf(fp,"\n\n\t---Value sorted by magnitude---\n");
 
     double* sortA = insertionSort_A(rows,data); // calling a function
-    double* sortB = insertionSort_A(rows,data);
-    double* sortC = insertionSort_A(rows,data);
+    double* sortB = insertionSort_B(rows,data);
+    double* sortC = insertionSort_C(rows,data);
 
     for (int i = 0; i < rows; i++)
     {

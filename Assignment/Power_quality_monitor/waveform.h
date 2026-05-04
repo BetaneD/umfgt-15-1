@@ -28,9 +28,9 @@ double variance_A(int rows,Waveform *data);
 double variance_B(int rows,Waveform *data);
 double variance_C(int rows,Waveform *data);
 
-double STDEV_A(int rows,double variance_A);
-double STDEV_B(int rows,double variance_B);
-double STDEV_C(int rows,double variance_C);
+double STDEV_A(double variance_A);
+double STDEV_B(double variance_B);
+double STDEV_C(double variance_C);
 
 double* insertionSort_A(int rows, Waveform *data);
 double* insertionSort_B(int rows, Waveform *data);

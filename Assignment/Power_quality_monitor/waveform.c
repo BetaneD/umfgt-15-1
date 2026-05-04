@@ -18,15 +18,18 @@ double rms_A (int rows,Waveform *data) {
 }
 double rms_B (int rows,Waveform *data) {
 
+
     double rms = 0.0;
 
     for (int j = 0; j < rows; j++) {
         rms += data[j].phase_B * data[j].phase_B;//squares itself then adds it to variable
     }
 
-    return sqrt(rms /rows);;
+    return sqrt(rms /rows);
 }
 double rms_C (int rows,Waveform *data) {
+
+
     double rms = 0.0;
 
     for (int j = 0; j < rows; j++) {
@@ -42,8 +45,8 @@ double amplitude_A (int rows,Waveform *data) {
     double min = data[0].phase_A;
 
     for (int j = 0; j < rows; j++) {
-        max = (max <= data[j].phase_A)? max: data[j].phase_A; // compares values with current max
-        min = (min >= data[j].phase_A)? min : data[j].phase_A; // compares values with current min
+        max = (max >= data[j].phase_A)? max: data[j].phase_A;  // compares values with current max
+        min = (min <= data[j].phase_A)? min : data[j].phase_A; // compares values with current min
     }
     return max - min ;
 }
@@ -53,8 +56,8 @@ double amplitude_B (int rows,Waveform *data) {
     double min = data[0].phase_B;
 
     for (int j = 0; j < rows; j++) {
-        max = (max <= data[j].phase_B)? max: data[j].phase_B; // compares values with current max
-        min = (min >= data[j].phase_B)? min : data[j].phase_B; // compares values with current min
+        max = (max >= data[j].phase_B)? max: data[j].phase_B; // compares values with current max
+        min = (min <= data[j].phase_B)? min : data[j].phase_B; // compares values with current min
     }
     return max - min ;
 }
@@ -64,8 +67,8 @@ double amplitude_C (int rows,Waveform *data) {
     double min = data[0].phase_C;
 
     for (int j = 0; j < rows; j++) {
-        max = (max <= data[j].phase_C)? max: data[j].phase_C; // compares values with current max
-        min = (min >= data[j].phase_C)? min : data[j].phase_C; // compares values with current min
+        max = (max >= data[j].phase_C)? max: data[j].phase_C; // compares values with current max
+        min = (min <= data[j].phase_C)? min : data[j].phase_C; // compares values with current min
     }
     return max - min ;
 }
@@ -108,6 +111,10 @@ double* Detect_clipping_A(double limit, int rows, Waveform *data, int *count) { 
             detect++;
     }
 
+    *count = detect; // count is equal to detect
+
+    if (detect == 0) return NULL; // returns 0
+
     double* array_A = malloc(detect * sizeof(double)); // allocates memory
 
     if (array_A == NULL) {
@@ -121,8 +128,6 @@ double* Detect_clipping_A(double limit, int rows, Waveform *data, int *count) { 
             array_A[k++] = data[j].timestamp;
         }
     }
-
-    *count = detect; // count is equal to detect
 
     if (detect == 0) {
         *count = 0;
@@ -251,15 +256,15 @@ double variance_C(int rows,Waveform *data) {
     return variance/rows; // divide by rows
 }
 
-double STDEV_A(int rows,double variance_A) {
+double STDEV_A(double variance_A) {
 
     return sqrt(variance_A); // square roots variance
 }
-double STDEV_B(int rows,double variance_B) {
+double STDEV_B(double variance_B) {
 
     return sqrt(variance_B); // square roots variance
 }
-double STDEV_C(int rows,double variance_C) {
+double STDEV_C(double variance_C) {
 
     return sqrt(variance_C); // square roots variance
 }
