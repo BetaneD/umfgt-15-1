@@ -81,7 +81,7 @@ void print_data_A(int rows, Waveform *data, FILE *fp) {
   fprintf(fp,"\t---PHASE A---");
 
   double phase_A_rms = rms_A(rows, data);
-  fprintf(fp,"\n\n the RMS of phase A is %.2lf", phase_A_rms);
+    fprintf(fp,"\n\n the RMS of phase A is %.2lf", phase_A_rms);
 
   bool toleranceA = tolerance_check(230,10,phase_A_rms);
     if (toleranceA) {
@@ -91,7 +91,10 @@ void print_data_A(int rows, Waveform *data, FILE *fp) {
     }
 
   double amplitudeA = amplitude_A(rows,data);
-  fprintf(fp,"\n the amplitude of phase A is %.2lf", amplitudeA);
+    fprintf(fp,"\n the amplitude of phase A is %.2lf", amplitudeA);
+
+  double DC_offsetA = DC_offset_A(rows,data);
+    fprintf(fp,"\n the DC offset of phase A is %.2lf", DC_offsetA);
 
   int count = 0;
   double* clippingA = Detect_clipping_A(324.9, rows, data, &count);
@@ -99,20 +102,17 @@ void print_data_A(int rows, Waveform *data, FILE *fp) {
     if (count == 0) {
         fprintf(fp, "\n clipping not detected");
     } else {
-        fprintf(fp, "\n clipping detected at timestamp :\n");
+        fprintf(fp, "\n\n clipping detected at timestamp :\n");
         for (int i = 0; i < count; i++) {
             fprintf(fp, "\n %lf", clippingA[i]);
         }
     }
 
-  double DC_offsetA = DC_offset_A(rows,data);
-  fprintf(fp,"\n\n the DC offset of phase A is %.2lf", DC_offsetA);
-
     double VarianceA = variance_A(rows,data);
-    fprintf(fp,"\n the variance of phase A is %.2lf", VarianceA);
+      fprintf(fp,"\n\n the variance of phase A is %.2lf", VarianceA);
 
     double STDEVA = STDEV_A(rows,VarianceA);
-    fprintf(fp,"\n the STDEV of phase A is %.2lf", STDEVA);
+      fprintf(fp,"\n the Standard deviation of phase A is %.2lf", STDEVA);
 
     free(clippingA);
 
@@ -129,7 +129,7 @@ void print_data_B(int rows, Waveform *data, FILE *fp) {
   fprintf(fp,"\n\n\t---PHASE B---");
 
   double phase_B_rms = rms_B(rows, data);
-  fprintf(fp,"\n\n the RMS of phase B is %.2lf", phase_B_rms);
+    fprintf(fp,"\n\n the RMS of phase B is %.2lf", phase_B_rms);
 
   bool toleranceB = tolerance_check(230,10,phase_B_rms);
     if (toleranceB) {
@@ -139,7 +139,10 @@ void print_data_B(int rows, Waveform *data, FILE *fp) {
     }
 
   double amplitudeB = amplitude_B(rows,data);
-  fprintf(fp,"\n the amplitude of phase B is %.2lf", amplitudeB);
+    fprintf(fp,"\n the amplitude of phase B is %.2lf", amplitudeB);
+
+  double DC_offsetB = DC_offset_B(rows,data);
+    fprintf(fp,"\n the DC offset of phase B is %.2lf", DC_offsetB);
 
   int count = 0;
   double* clippingB = Detect_clipping_B(324.9, rows, data, &count);
@@ -147,20 +150,17 @@ void print_data_B(int rows, Waveform *data, FILE *fp) {
     if (count == 0) {
         fprintf(fp, "\n clipping not detected");
     } else {
-        fprintf(fp, "\n clipping detected at timestamp :\n");
+        fprintf(fp, "\n\n clipping detected at timestamp :\n");
         for (int i = 0; i < count; i++) {
             fprintf(fp, "\n %lf", clippingB[i]);
         }
     }
 
-  double DC_offsetB = DC_offset_B(rows,data);
-  fprintf(fp,"\n\n the DC offset of phase B is %.2lf", DC_offsetB);
+  double VarianceB = variance_B(rows,data);
+    fprintf(fp,"\n\n the variance of phase B is %.2lf", VarianceB);
 
-    double VarianceB = variance_B(rows,data);
-    fprintf(fp,"\n the variance of phase B is %.2lf", VarianceB);
-
-    double STDEVB = STDEV_B(rows,VarianceB);
-    fprintf(fp,"\n the STDEV of phase B is %.2lf", STDEVB);
+  double STDEVB = STDEV_B(rows,VarianceB);
+    fprintf(fp,"\n the Standard deviation of phase B is %.2lf", STDEVB);
 
     free(clippingB);
 }
@@ -188,30 +188,47 @@ void print_data_C(int rows, Waveform *data, FILE *fp) {
   double amplitudeC = amplitude_C(rows,data);
     fprintf(fp,"\n the amplitude of phase B is %.2lf", amplitudeC);
 
+  double DC_offsetC = DC_offset_C(rows,data);
+    fprintf(fp,"\n the DC offset of phase C is %.2lf", DC_offsetC);
+
     int count = 0;
     double* clippingC = Detect_clipping_C(324.9, rows, data, &count);
 
     if (count == 0) {
         fprintf(fp, "\n clipping not detected");
     } else {
-        fprintf(fp, "\n clipping detected at timestamp :\n");
+        fprintf(fp, "\n\n clipping detected at timestamp :\n");
         for (int i = 0; i < count; i++) {
             fprintf(fp, "\n %lf", clippingC[i]);
         }
     }
 
-  double DC_offsetC = DC_offset_C(rows,data);
-    fprintf(fp,"\n\n the DC offset of phase C is %.2lf", DC_offsetC);
-
   double VarianceC = variance_C(rows,data);
-    fprintf(fp,"\n the variance of phase C is %.2lf", VarianceC);
+    fprintf(fp,"\n\n the variance of phase C is %.2lf", VarianceC);
 
   double STDEVC = STDEV_C(rows,VarianceC);
-    fprintf(fp,"\n the STDEV of phase C is %.2lf", STDEVC);
+    fprintf(fp,"\n the Standard deviation of phase C is %.2lf", STDEVC);
 
     free(clippingC);
 
 }
+
+void print_General(int rows, Waveform *data, FILE *fp) {
+
+    fprintf(fp,"\n\n\t--- Signal Analysis---");
+
+    double Time = Time_G(rows,data);
+    double* Frequency = Frequency_G(rows,data);
+    double* PF = PF_G(rows,data);
+    double* THD = THD_G(rows,data);
+
+    fprintf(fp,"\n\n over %0.4lf ms window",Time);
+    fprintf(fp,"\n\n Frequency range: %0.4lf Hz to %0.4lf Hz",Frequency[0],Frequency[1]);
+    fprintf(fp,"\n Power Factor range: %0.4lf to %0.4lf",PF[0],PF[1]);
+    fprintf(fp,"\n THD : %0.4lf  %% to %0.4lf %%",THD[0],THD[1]);
+
+}
+
 
 void print_sort(int rows, Waveform *data, FILE *fp) {
     if (fp == NULL) {
@@ -241,7 +258,6 @@ void print_sort(int rows, Waveform *data, FILE *fp) {
     free(sortC);
 
 }
-
 
 void csv_close(Waveform *data) {
     if (data != NULL) {

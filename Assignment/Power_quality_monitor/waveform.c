@@ -42,8 +42,8 @@ double amplitude_A (int rows,Waveform *data) {
     double min = data[0].phase_A;
 
     for (int j = 0; j < rows; j++) {
-        max = (max >= data[j].phase_A)? max: data[j].phase_A;
-        min = (min <= data[j].phase_A)? min : data[j].phase_A;
+        max = (max <= data[j].phase_A)? max: data[j].phase_A;
+        min = (min >= data[j].phase_A)? min : data[j].phase_A;
     }
     return max - min ;
 }
@@ -53,8 +53,8 @@ double amplitude_B (int rows,Waveform *data) {
     double min = data[0].phase_B;
 
     for (int j = 0; j < rows; j++) {
-        max = (max >= data[j].phase_B)? max: data[j].phase_B;
-        min = (min <= data[j].phase_B)? min : data[j].phase_B;
+        max = (max <= data[j].phase_B)? max: data[j].phase_B;
+        min = (min >= data[j].phase_B)? min : data[j].phase_B;
     }
     return max - min ;
 }
@@ -64,8 +64,8 @@ double amplitude_C (int rows,Waveform *data) {
     double min = data[0].phase_C;
 
     for (int j = 0; j < rows; j++) {
-        max = (max >= data[j].phase_C)? max: data[j].phase_C;
-        min = (min <= data[j].phase_C)? min : data[j].phase_C;
+        max = (max <= data[j].phase_C)? max: data[j].phase_C;
+        min = (min >= data[j].phase_C)? min : data[j].phase_C;
     }
     return max - min ;
 }
@@ -340,4 +340,80 @@ double* insertionSort_C(int rows, Waveform *data){
         sort_C[j + 1] = key;
     }
     return sort_C;
+}
+
+double Time_G (int rows,Waveform *data) {
+
+    double max = data[0].timestamp;
+
+    for (int j = 0; j < rows; j++) {
+        if (data[j].timestamp > max) max = data[j].timestamp;
+    }
+
+    return max ;
+}
+double* Frequency_G (int rows,Waveform *data) {
+
+    double* array_FREQ = malloc(2 * sizeof(double));
+
+    if (array_FREQ == NULL) {
+        printf("ERROR: check Frequency G \n");
+        exit(1);
+    }
+
+    double max = data[0].frequency;
+    double min = data[0].frequency;
+
+    for (int j = 0; j < rows; j++) {
+        max = (max >= data[j].frequency)? max: data[j].frequency;
+        min = (min <= data[j].frequency)? min : data[j].frequency;
+    }
+    array_FREQ[1] = max;
+    array_FREQ[0] = min;
+
+    return array_FREQ;
+}
+
+double* PF_G (int rows,Waveform *data) {
+
+    double* array_PF = malloc(2 * sizeof(double));
+
+    if (array_PF == NULL) {
+        printf("ERROR: check Power factor G \n");
+        exit(1);
+    }
+
+    double max = data[0].power_f;
+    double min = data[0].power_f;
+
+    for (int j = 0; j < rows; j++) {
+        max = (max >= data[j].power_f)? max: data[j].power_f;
+        min = (min <= data[j].power_f)? min : data[j].power_f;
+    }
+    array_PF[1] = max;
+    array_PF[0] = min;
+
+    return array_PF;
+}
+
+double* THD_G (int rows,Waveform *data) {
+
+    double* array_THD = malloc(2 * sizeof(double));
+
+    if (array_THD == NULL) {
+        printf("ERROR: check THD G \n");
+        exit(1);
+    }
+
+    double max = data[0].thd;
+    double min = data[0].thd;
+
+    for (int j = 0; j < rows; j++) {
+        max = (max >= data[j].thd)? max: data[j].thd;
+        min = (min <= data[j].thd)? min : data[j].thd;
+    }
+    array_THD[1] = max;
+    array_THD[0] = min;
+
+    return array_THD;
 }

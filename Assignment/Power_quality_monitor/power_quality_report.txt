@@ -2,7 +2,9 @@
 
  the RMS of phase A is 229.81
  In tolerance : YES
- the amplitude of phase A is 650.00
+ the amplitude of phase A is -650.00
+ the DC offset of phase A is 0.00
+
  clipping detected at timestamp :
 
  0.005000
@@ -26,15 +28,16 @@
  0.185000
  0.195000
 
- the DC offset of phase A is 0.00
  the variance of phase A is 52812.50
- the STDEV of phase A is 229.81
+ the Standard deviation of phase A is 229.81
 
 	---PHASE B---
 
  the RMS of phase B is 229.81
  In tolerance : YES
- the amplitude of phase B is 649.86
+ the amplitude of phase B is -649.86
+ the DC offset of phase B is 0.00
+
  clipping detected at timestamp :
 
  0.008400
@@ -58,15 +61,16 @@
  0.188400
  0.198400
 
- the DC offset of phase B is 0.00
  the variance of phase B is 52812.50
- the STDEV of phase B is 229.81
+ the Standard deviation of phase B is 229.81
 
 	---PHASE C---
 
  the RMS of phase B is 229.81
  In tolerance : YES
- the amplitude of phase B is 649.86
+ the amplitude of phase B is -649.86
+ the DC offset of phase C is 0.00
+
  clipping detected at timestamp :
 
  0.001600
@@ -90,9 +94,16 @@
  0.181600
  0.191600
 
- the DC offset of phase C is 0.00
  the variance of phase C is 52812.50
- the STDEV of phase C is 229.81
+ the Standard deviation of phase C is 229.81
+
+	--- Signal Analysis---
+
+ over 0.1998 ms window
+
+ Frequency range: 50.0000 Hz to 50.0475 Hz
+ Power Factor range: 0.9500 to 0.9617
+ THD : 2.0000  % to 2.1839 %
 
 	---Value sorted by magnitude---
  phase_A: 0.00 | phase_B: 0.00 | phase_C: 0.00

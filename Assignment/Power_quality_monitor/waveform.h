@@ -35,6 +35,11 @@ double* insertionSort_A(int rows, Waveform *data);
 double* insertionSort_B(int rows, Waveform *data);
 double* insertionSort_C(int rows, Waveform *data);
 
+double Time_G (int rows,Waveform *data);
+double* Frequency_G (int rows,Waveform *data);
+double* PF_G (int rows,Waveform *data);
+double* THD_G (int rows,Waveform *data);
+
 void csv_close(Waveform *data);
 
 #endif //UMFGT_15_1_WAVEFORM_H

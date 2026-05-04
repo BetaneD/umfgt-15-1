@@ -15,6 +15,7 @@ int main(int argc, char * argv[])
     print_data_A(rows, data, fp);
     print_data_B(rows, data, fp);
     print_data_C(rows, data, fp);
+    print_General(rows, data, fp);
     print_sort(rows,data,fp);
     fclose(fp);
 

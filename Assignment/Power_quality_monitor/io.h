@@ -20,6 +20,7 @@ void print_data_A(int rows, Waveform *data, FILE *fp);
 void print_data_B(int rows, Waveform *data, FILE *fp);
 void print_data_C(int rows, Waveform *data, FILE *fp);
 void print_sort(int rows, Waveform *data, FILE *fp);
+void print_General(int rows, Waveform *data, FILE *fp);
 
 
 
