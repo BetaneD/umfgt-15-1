@@ -4,6 +4,7 @@
 
 #include "io.h"
 
+// function declarations
 
 double rms_A (int rows,Waveform *data);
 double rms_B (int rows,Waveform *data);
