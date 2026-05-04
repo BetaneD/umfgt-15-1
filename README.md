@@ -7,14 +7,14 @@ To compile my coding assignment from my repository
 
 The directory path for my code is: 
 
-    umfgt-15-1/Assignment/Power_quality_monitor.
+    umfgt-15-1/Assignment/Power_quality_monitor
 
 
 ### load the CMakeLists.txt.
 
 If prompted to create or load a CMakeLists.txt file, the directory path for my CMakeLists.txt is:
 
-    umfgt-15-1/Assignment/Power_quality_monitor/cmakelists.txt.
+    umfgt-15-1/Assignment/Power_quality_monitor/cmakelists.txt
     
 This is the CMakeLists.txt file that connects my code files.
 
@@ -23,7 +23,7 @@ This is the CMakeLists.txt file that connects my code files.
 
 Ensure the file power_quality_log.csv is located in the directory path 
 
-    umfgt-15-1/Assignment/Power_quality_monitor/power_quality_log.csv.
+    umfgt-15-1/Assignment/Power_quality_monitor/power_quality_log.csv
     
 This is the file the program will read.
 
@@ -31,7 +31,7 @@ This is the file the program will read.
 
 Go to Run > Edit Configurations and in the Program Arguments type 
 
-    ../power_quality_log.csv.
+    ../power_quality_log.csv
     
 This is the location of the file to be read.
 
